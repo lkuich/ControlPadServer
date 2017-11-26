@@ -7,8 +7,6 @@ using Grpc.Core;
 using Service;
 using WindowsInput;
 using WindowsInput.Native;
-using WindowsInput;
-using WindowsInput.Native;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -20,11 +18,11 @@ namespace ControlHubServer
         private KeyboardSimulator KeyboardSim { get; set; }
         private List<VirtualKeyCode> CurrentKeys { get; set; }
 
-        public StandardInputImpl()
+        public StandardInputImpl(InputType inputType)
         {
             var InputSim = new InputSimulator();
             MouseSim = new MouseSimulator(InputSim);
-            KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: Settings.INPUT_TYPE == InputType.DIRECTINPUT);
+            KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: inputType == InputType.DIRECTINPUT);
             CurrentKeys = new List<VirtualKeyCode>();
         }
 

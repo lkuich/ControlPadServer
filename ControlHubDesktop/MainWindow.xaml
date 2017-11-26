@@ -1,0 +1,20 @@
+﻿<Window x:Class="ControlHubDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlHubDesktop"
+        mc:Ignorable="d"
+        Title="ControlHub Server" Height="281.115" Width="351.393" Loaded="Window_Loaded">
+    <Grid>
+        <ComboBox x:Name="comboNetworks" HorizontalAlignment="Left" Margin="123,72,0,0" VerticalAlignment="Top" Width="162" Height="22" SelectionChanged="comboNetworks_SelectionChanged"/>
+        <Label x:Name="lblTitle" Content="ControlHub Server" HorizontalAlignment="Center" Margin="83,10,89.111,214.222" VerticalAlignment="Center" Height="30" Width="175" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Listening on:" HorizontalAlignment="Left" Margin="41,68,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+        <RadioButton x:Name="radioMouseKeyboard" GroupName="ControlType" Content="Standard (Mouse/Keybord)" HorizontalAlignment="Left" Margin="123,137,0,0" VerticalAlignment="Top" Height="15" Width="162" Checked="radioMouseKeyboard_Checked"/>
+        <RadioButton x:Name="radioXbox" GroupName="ControlType" Content="Xbox 360 Controller" HorizontalAlignment="Left" Margin="123,116,0,0" VerticalAlignment="Top" Height="15" Width="124" IsChecked="True" Checked="radioXbox_Checked"/>
+        <RadioButton x:Name="radioDirectInput" GroupName="ControlType" Content="DirectInput" HorizontalAlignment="Left" Margin="123,157,0,0" VerticalAlignment="Top" Height="15" Width="78" Checked="radioDirectInput_Checked"/>
+        <Label Content="Controller Type:" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Height="26" Width="93"/>
+        <TextBlock x:Name="blockDescription" HorizontalAlignment="Left" Margin="123,177,0,0" TextWrapping="Wrap" Text="Emulates a real Xbox 360 Controller, if your game has controller support, this is the best configuration to use." VerticalAlignment="Top" Width="162" FontStyle="Italic" FontSize="10"/>
+
+    </Grid>
+</Window>

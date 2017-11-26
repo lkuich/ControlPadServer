@@ -16,19 +16,11 @@ namespace ControlHubServer
     class XboxImpl : XboxButtons.XboxButtonsBase
     {
         private Xbox360Controller X360Controller { get; set; }
-        private List<Xbox360Buttons> ButtonsDown { get; set; }
-        private Point LeftAxis { get; set; }
-        private Point RightAxis { get; set; }
-
         private Xbox360Report Report { get; set; }
 
         public XboxImpl(Xbox360Controller X360Controller)
         {
             this.X360Controller = X360Controller;
-            this.ButtonsDown = new List<Xbox360Buttons>();
-            this.LeftAxis = new Point();
-            this.RightAxis = new Point();
-
             this.Report = new Xbox360Report();
         }
 
@@ -40,9 +32,7 @@ namespace ControlHubServer
 
                 Report.SetButtonState((Xbox360Buttons)button.Id, true);
                 X360Controller.SendReport(Report);
-
-                // ButtonsDown.Add((Xbox360Buttons)button.Id);
-
+                
                 Response reply = new Response { Received = true };
                 await responseStream.WriteAsync(reply);
             }
@@ -57,8 +47,6 @@ namespace ControlHubServer
                 Report.SetButtonState((Xbox360Buttons)button.Id, false);
                 X360Controller.SendReport(Report);
                 
-                // ButtonsDown.Remove((Xbox360Buttons)button.Id);
-
                 Response reply = new Response { Received = true };
                 await responseStream.WriteAsync(reply);
             }

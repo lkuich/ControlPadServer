@@ -7,13 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlHubClient", "Control
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViGEmClient", "..\..\..\Downloads\linkedin_scrape\ViGEm-master\NET\ViGEmClient\ViGEmClient.csproj", "{AA18EBCF-7E9D-4BC5-8760-E8C6E9A773E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubServer", "ControlHubServer\ControlHubServer.csproj", "{ECE0977E-B4C3-4660-9F78-012AA2A12924}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubConsole", "ControlHubConsole\ControlHubConsole.csproj", "{ECE0977E-B4C3-4660-9F78-012AA2A12924}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViGEmClientTest", "ViGEmClientTest\ViGEmClientTest.csproj", "{12E11542-0CF3-476C-9EF3-880F6F6FFD54}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketService", "SocketService\SocketService.csproj", "{FA6F53C8-13D4-4249-B6FD-D8E21F6845FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsInput", "WindowsInput\WindowsInput.csproj", "{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubDesktop", "ControlHubDesktop\ControlHubDesktop.csproj", "{C25D3B7B-6E79-45F5-A9DE-06EE541C15AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubServer", "ControlHubServer\ControlHubServer.csproj", "{1142141A-255D-4526-8B81-532920F5FDCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C25D3B7B-6E79-45F5-A9DE-06EE541C15AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C25D3B7B-6E79-45F5-A9DE-06EE541C15AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C25D3B7B-6E79-45F5-A9DE-06EE541C15AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C25D3B7B-6E79-45F5-A9DE-06EE541C15AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1142141A-255D-4526-8B81-532920F5FDCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1142141A-255D-4526-8B81-532920F5FDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1142141A-255D-4526-8B81-532920F5FDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1142141A-255D-4526-8B81-532920F5FDCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

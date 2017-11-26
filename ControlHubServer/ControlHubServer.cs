@@ -1,16 +1,18 @@
 ﻿using System;
-using Service;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Grpc.Core;
-using System.Collections.Generic;
 using System.Drawing;
 using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
+using Service;
 
 namespace ControlHubServer
 {
-    enum InputType
+    public enum InputType
     {
         STANDARD,
         DIRECTINPUT,
@@ -26,30 +28,25 @@ namespace ControlHubServer
 
     public class ControlHubServer
     {
-        public string Host { get; private set; }
+        public string Host { get; set; }
         public int Port { get; private set; }
 
         private Server server;
-        
-        public ControlHubServer(string host = "192.168.1.118", int port = 50051)
+        public Xbox360Controller X360Controller { get; set; }
+
+        public ControlHubServer(string host = "localhost", int port = 50051)
         {
             this.Host = host;
             this.Port = port;
         }
 
-        public void Start()
+        public void Start(InputType inputType)
         {
-            if (Settings.INPUT_TYPE == InputType.XBOX)
+            if (inputType == InputType.XBOX)
             {
                 // TODO: Only connect when prompted
                 var client = new ViGEmClient();
-                var X360Controller = new Xbox360Controller(client);
-                X360Controller.FeedbackReceived +=
-                    (sender, eventArgs) => Console.WriteLine(
-                        eventArgs.ToString() +
-                        $"LM: {eventArgs.LargeMotor}, " +
-                        $"SM: {eventArgs.SmallMotor}, " +
-                        $"LED: {eventArgs.LedNumber}");
+                X360Controller = new Xbox360Controller(client);
                 X360Controller.Connect();
 
                 server = new Server
@@ -59,30 +56,25 @@ namespace ControlHubServer
                     },
                     Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
                 };
-            } else if (Settings.INPUT_TYPE == InputType.STANDARD || Settings.INPUT_TYPE == InputType.DIRECTINPUT)
+            }
+            else if (inputType == InputType.STANDARD || inputType == InputType.DIRECTINPUT)
             {
                 server = new Server
                 {
                     Services = {
-                        StandardInput.BindService(new StandardInputImpl())
+                        StandardInput.BindService(new StandardInputImpl(inputType))
                     },
                     Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
                 };
             }
-            
+
             server.Start();
-
-            Console.WriteLine("Server listening on port " + Port);
         }
-    }
 
-    class Program
-    {
-        static void Main(string[] args)
+        public async void Stop()
         {
-            var s = new ControlHubServer();
-            s.Start();
-            Console.ReadLine();
+            X360Controller.Disconnect();
+            await server.ShutdownAsync();
         }
     }
 }
