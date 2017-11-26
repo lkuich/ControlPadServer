@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
 namespace Service {
-  public static partial class Keyboard
+  public static partial class StandardInput
   {
-    static readonly string __ServiceName = "service.Keyboard";
+    static readonly string __ServiceName = "service.StandardInput";
 
     static readonly grpc::Marshaller<global::Service.Key> __Marshaller_Key = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Key.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.MouseCoords> __Marshaller_MouseCoords = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.MouseCoords.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Service.Key, global::Service.Response> __Method_PressKey = new grpc::Method<global::Service.Key, global::Service.Response>(
         grpc::MethodType.DuplexStreaming,
@@ -22,76 +23,6 @@ namespace Service {
         "PressKey",
         __Marshaller_Key,
         __Marshaller_Response);
-
-    /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
-    {
-      get { return global::Service.ServicesReflection.Descriptor.Services[0]; }
-    }
-
-    /// <summary>Base class for server-side implementations of Keyboard</summary>
-    public abstract partial class KeyboardBase
-    {
-      public virtual global::System.Threading.Tasks.Task PressKey(grpc::IAsyncStreamReader<global::Service.Key> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-    }
-
-    /// <summary>Client for Keyboard</summary>
-    public partial class KeyboardClient : grpc::ClientBase<KeyboardClient>
-    {
-      /// <summary>Creates a new client for Keyboard</summary>
-      /// <param name="channel">The channel to use to make remote calls.</param>
-      public KeyboardClient(grpc::Channel channel) : base(channel)
-      {
-      }
-      /// <summary>Creates a new client for Keyboard that uses a custom <c>CallInvoker</c>.</summary>
-      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public KeyboardClient(grpc::CallInvoker callInvoker) : base(callInvoker)
-      {
-      }
-      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected KeyboardClient() : base()
-      {
-      }
-      /// <summary>Protected constructor to allow creation of configured clients.</summary>
-      /// <param name="configuration">The client configuration.</param>
-      protected KeyboardClient(ClientBaseConfiguration configuration) : base(configuration)
-      {
-      }
-
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.Response> PressKey(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return PressKey(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.Response> PressKey(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncDuplexStreamingCall(__Method_PressKey, null, options);
-      }
-      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override KeyboardClient NewInstance(ClientBaseConfiguration configuration)
-      {
-        return new KeyboardClient(configuration);
-      }
-    }
-
-    /// <summary>Creates service definition that can be registered with a server</summary>
-    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(KeyboardBase serviceImpl)
-    {
-      return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_PressKey, serviceImpl.PressKey).Build();
-    }
-
-  }
-  public static partial class Mouse
-  {
-    static readonly string __ServiceName = "service.Mouse";
-
-    static readonly grpc::Marshaller<global::Service.MouseCoords> __Marshaller_MouseCoords = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.MouseCoords.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Service.MouseCoords, global::Service.Response> __Method_MoveMouse = new grpc::Method<global::Service.MouseCoords, global::Service.Response>(
         grpc::MethodType.DuplexStreaming,
@@ -103,12 +34,17 @@ namespace Service {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Service.ServicesReflection.Descriptor.Services[1]; }
+      get { return global::Service.ServicesReflection.Descriptor.Services[0]; }
     }
 
-    /// <summary>Base class for server-side implementations of Mouse</summary>
-    public abstract partial class MouseBase
+    /// <summary>Base class for server-side implementations of StandardInput</summary>
+    public abstract partial class StandardInputBase
     {
+      public virtual global::System.Threading.Tasks.Task PressKey(grpc::IAsyncStreamReader<global::Service.Key> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
       public virtual global::System.Threading.Tasks.Task MoveMouse(grpc::IAsyncStreamReader<global::Service.MouseCoords> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -116,29 +52,37 @@ namespace Service {
 
     }
 
-    /// <summary>Client for Mouse</summary>
-    public partial class MouseClient : grpc::ClientBase<MouseClient>
+    /// <summary>Client for StandardInput</summary>
+    public partial class StandardInputClient : grpc::ClientBase<StandardInputClient>
     {
-      /// <summary>Creates a new client for Mouse</summary>
+      /// <summary>Creates a new client for StandardInput</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
-      public MouseClient(grpc::Channel channel) : base(channel)
+      public StandardInputClient(grpc::Channel channel) : base(channel)
       {
       }
-      /// <summary>Creates a new client for Mouse that uses a custom <c>CallInvoker</c>.</summary>
+      /// <summary>Creates a new client for StandardInput that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public MouseClient(grpc::CallInvoker callInvoker) : base(callInvoker)
+      public StandardInputClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected MouseClient() : base()
+      protected StandardInputClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
-      protected MouseClient(ClientBaseConfiguration configuration) : base(configuration)
+      protected StandardInputClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
 
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.Response> PressKey(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return PressKey(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.Response> PressKey(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_PressKey, null, options);
+      }
       public virtual grpc::AsyncDuplexStreamingCall<global::Service.MouseCoords, global::Service.Response> MoveMouse(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return MoveMouse(new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -148,17 +92,18 @@ namespace Service {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_MoveMouse, null, options);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override MouseClient NewInstance(ClientBaseConfiguration configuration)
+      protected override StandardInputClient NewInstance(ClientBaseConfiguration configuration)
       {
-        return new MouseClient(configuration);
+        return new StandardInputClient(configuration);
       }
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(MouseBase serviceImpl)
+    public static grpc::ServerServiceDefinition BindService(StandardInputBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_PressKey, serviceImpl.PressKey)
           .AddMethod(__Method_MoveMouse, serviceImpl.MoveMouse).Build();
     }
 
@@ -170,6 +115,7 @@ namespace Service {
     static readonly grpc::Marshaller<global::Service.XboxButton> __Marshaller_XboxButton = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxButton.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.XboxTrigger> __Marshaller_XboxTrigger = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxTrigger.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.XboxThumbAxis> __Marshaller_XboxThumbAxis = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxThumbAxis.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Service.XboxButton, global::Service.Response> __Method_PressXboxButton = new grpc::Method<global::Service.XboxButton, global::Service.Response>(
         grpc::MethodType.DuplexStreaming,
@@ -199,10 +145,24 @@ namespace Service {
         __Marshaller_XboxTrigger,
         __Marshaller_Response);
 
+    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.Response> __Method_XboxLeftThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.Response>(
+        grpc::MethodType.DuplexStreaming,
+        __ServiceName,
+        "XboxLeftThumbAxis",
+        __Marshaller_XboxThumbAxis,
+        __Marshaller_Response);
+
+    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.Response> __Method_XboxRightThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.Response>(
+        grpc::MethodType.DuplexStreaming,
+        __ServiceName,
+        "XboxRightThumbAxis",
+        __Marshaller_XboxThumbAxis,
+        __Marshaller_Response);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Service.ServicesReflection.Descriptor.Services[2]; }
+      get { return global::Service.ServicesReflection.Descriptor.Services[1]; }
     }
 
     /// <summary>Base class for server-side implementations of XboxButtons</summary>
@@ -224,6 +184,16 @@ namespace Service {
       }
 
       public virtual global::System.Threading.Tasks.Task XboxRightTrigger(grpc::IAsyncStreamReader<global::Service.XboxTrigger> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task XboxLeftThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task XboxRightThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -285,6 +255,22 @@ namespace Service {
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxRightTrigger, null, options);
       }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxLeftThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return XboxLeftThumbAxis(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxLeftThumbAxis(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxLeftThumbAxis, null, options);
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxRightThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return XboxRightThumbAxis(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxRightThumbAxis(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxRightThumbAxis, null, options);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override XboxButtonsClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -300,160 +286,8 @@ namespace Service {
           .AddMethod(__Method_PressXboxButton, serviceImpl.PressXboxButton)
           .AddMethod(__Method_DepressXboxButton, serviceImpl.DepressXboxButton)
           .AddMethod(__Method_XboxLeftTrigger, serviceImpl.XboxLeftTrigger)
-          .AddMethod(__Method_XboxRightTrigger, serviceImpl.XboxRightTrigger).Build();
-    }
-
-  }
-  public static partial class XboxLeftThumbAxis
-  {
-    static readonly string __ServiceName = "service.XboxLeftThumbAxis";
-
-    static readonly grpc::Marshaller<global::Service.XboxThumbAxis> __Marshaller_XboxThumbAxis = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxThumbAxis.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.Response> __Method_XboxLeftThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.Response>(
-        grpc::MethodType.DuplexStreaming,
-        __ServiceName,
-        "XboxLeftThumbAxis",
-        __Marshaller_XboxThumbAxis,
-        __Marshaller_Response);
-
-    /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
-    {
-      get { return global::Service.ServicesReflection.Descriptor.Services[3]; }
-    }
-
-    /// <summary>Base class for server-side implementations of XboxLeftThumbAxis</summary>
-    public abstract partial class XboxLeftThumbAxisBase
-    {
-      public virtual global::System.Threading.Tasks.Task XboxLeftThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-    }
-
-    /// <summary>Client for XboxLeftThumbAxis</summary>
-    public partial class XboxLeftThumbAxisClient : grpc::ClientBase<XboxLeftThumbAxisClient>
-    {
-      /// <summary>Creates a new client for XboxLeftThumbAxis</summary>
-      /// <param name="channel">The channel to use to make remote calls.</param>
-      public XboxLeftThumbAxisClient(grpc::Channel channel) : base(channel)
-      {
-      }
-      /// <summary>Creates a new client for XboxLeftThumbAxis that uses a custom <c>CallInvoker</c>.</summary>
-      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public XboxLeftThumbAxisClient(grpc::CallInvoker callInvoker) : base(callInvoker)
-      {
-      }
-      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected XboxLeftThumbAxisClient() : base()
-      {
-      }
-      /// <summary>Protected constructor to allow creation of configured clients.</summary>
-      /// <param name="configuration">The client configuration.</param>
-      protected XboxLeftThumbAxisClient(ClientBaseConfiguration configuration) : base(configuration)
-      {
-      }
-
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxLeftThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return XboxLeftThumbAxis(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxLeftThumbAxis(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxLeftThumbAxis, null, options);
-      }
-      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override XboxLeftThumbAxisClient NewInstance(ClientBaseConfiguration configuration)
-      {
-        return new XboxLeftThumbAxisClient(configuration);
-      }
-    }
-
-    /// <summary>Creates service definition that can be registered with a server</summary>
-    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(XboxLeftThumbAxisBase serviceImpl)
-    {
-      return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_XboxLeftThumbAxis, serviceImpl.XboxLeftThumbAxis).Build();
-    }
-
-  }
-  public static partial class XboxRightThumbAxis
-  {
-    static readonly string __ServiceName = "service.XboxRightThumbAxis";
-
-    static readonly grpc::Marshaller<global::Service.XboxThumbAxis> __Marshaller_XboxThumbAxis = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxThumbAxis.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.Response> __Method_XboxRightThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.Response>(
-        grpc::MethodType.DuplexStreaming,
-        __ServiceName,
-        "XboxRightThumbAxis",
-        __Marshaller_XboxThumbAxis,
-        __Marshaller_Response);
-
-    /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
-    {
-      get { return global::Service.ServicesReflection.Descriptor.Services[4]; }
-    }
-
-    /// <summary>Base class for server-side implementations of XboxRightThumbAxis</summary>
-    public abstract partial class XboxRightThumbAxisBase
-    {
-      public virtual global::System.Threading.Tasks.Task XboxRightThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-    }
-
-    /// <summary>Client for XboxRightThumbAxis</summary>
-    public partial class XboxRightThumbAxisClient : grpc::ClientBase<XboxRightThumbAxisClient>
-    {
-      /// <summary>Creates a new client for XboxRightThumbAxis</summary>
-      /// <param name="channel">The channel to use to make remote calls.</param>
-      public XboxRightThumbAxisClient(grpc::Channel channel) : base(channel)
-      {
-      }
-      /// <summary>Creates a new client for XboxRightThumbAxis that uses a custom <c>CallInvoker</c>.</summary>
-      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public XboxRightThumbAxisClient(grpc::CallInvoker callInvoker) : base(callInvoker)
-      {
-      }
-      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected XboxRightThumbAxisClient() : base()
-      {
-      }
-      /// <summary>Protected constructor to allow creation of configured clients.</summary>
-      /// <param name="configuration">The client configuration.</param>
-      protected XboxRightThumbAxisClient(ClientBaseConfiguration configuration) : base(configuration)
-      {
-      }
-
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxRightThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return XboxRightThumbAxis(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxRightThumbAxis(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxRightThumbAxis, null, options);
-      }
-      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override XboxRightThumbAxisClient NewInstance(ClientBaseConfiguration configuration)
-      {
-        return new XboxRightThumbAxisClient(configuration);
-      }
-    }
-
-    /// <summary>Creates service definition that can be registered with a server</summary>
-    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(XboxRightThumbAxisBase serviceImpl)
-    {
-      return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_XboxRightTrigger, serviceImpl.XboxRightTrigger)
+          .AddMethod(__Method_XboxLeftThumbAxis, serviceImpl.XboxLeftThumbAxis)
           .AddMethod(__Method_XboxRightThumbAxis, serviceImpl.XboxRightThumbAxis).Build();
     }
 

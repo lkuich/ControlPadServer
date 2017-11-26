@@ -55,9 +55,7 @@ namespace ControlHubServer
                 server = new Server
                 {
                     Services = {
-                        XboxButtons.BindService(new XboxButtonsImpl(X360Controller)),
-                        XboxLeftThumbAxis.BindService(new XboxLeftThumbAxisImpl(X360Controller)),
-                        XboxRightThumbAxis.BindService(new XboxRightThumbAxisImpl(X360Controller))
+                        XboxButtons.BindService(new XboxImpl(X360Controller))
                     },
                     Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
                 };
@@ -66,8 +64,7 @@ namespace ControlHubServer
                 server = new Server
                 {
                     Services = {
-                        Keyboard.BindService(new KeyboardImpl()),
-                        Mouse.BindService(new MouseImpl())
+                        StandardInput.BindService(new StandardInputImpl())
                     },
                     Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
                 };

@@ -7,19 +7,24 @@ using Grpc.Core;
 using Service;
 using WindowsInput;
 using WindowsInput.Native;
+using WindowsInput;
+using WindowsInput.Native;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace ControlHubServer
 {
-    class KeyboardImpl: Keyboard.KeyboardBase
+    class StandardInputImpl : StandardInput.StandardInputBase
     {
+        private MouseSimulator MouseSim { get; set; }
         private KeyboardSimulator KeyboardSim { get; set; }
         private List<VirtualKeyCode> CurrentKeys { get; set; }
 
-        public KeyboardImpl()
+        public StandardInputImpl()
         {
             var InputSim = new InputSimulator();
+            MouseSim = new MouseSimulator(InputSim);
             KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: Settings.INPUT_TYPE == InputType.DIRECTINPUT);
-
             CurrentKeys = new List<VirtualKeyCode>();
         }
 
@@ -73,6 +78,65 @@ namespace ControlHubServer
 
                 if (CurrentKeys.Count > 0)
                     Console.WriteLine(string.Join(",", CurrentKeys.ToArray()));
+
+                Response reply = new Response { Received = true };
+                await responseStream.WriteAsync(reply);
+            }
+        }
+
+        public class PlatformControls
+        {
+            #region WIN32
+            [StructLayout(LayoutKind.Sequential)]
+            public struct POINT
+            {
+                public int X;
+                public int Y;
+
+                public static implicit operator Point(POINT point)
+                {
+                    return new Point(point.X, point.Y);
+                }
+            }
+
+            /// <summary>
+            /// Retrieves the cursor's position, in screen coordinates.
+            /// </summary>
+            /// <see>See MSDN documentation for further information.</see>
+            [DllImport("user32.dll")]
+            public static extern bool GetCursorPos(out POINT lpPoint);
+
+            public static Point GetCursorPosition()
+            {
+                POINT lpPoint;
+                GetCursorPos(out lpPoint);
+                //bool success = User32.GetCursorPos(out lpPoint);
+                // if (!success)
+
+                return lpPoint;
+            }
+            #endregion
+        }
+
+        public Point InitialMouseCoords { get; set; }
+        public override async Task MoveMouse(IAsyncStreamReader<MouseCoords> coordsStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        {
+            while (await coordsStream.MoveNext())
+            {
+                var coords = coordsStream.Current;
+
+                if (coords.Y == 0 && coords.X == 0)
+                    InitialMouseCoords = PlatformControls.GetCursorPosition();
+
+                Console.WriteLine("Moving mouse to: " + coords.X + "," + coords.Y);
+
+                var x = InitialMouseCoords.X + coords.X;
+                var y = InitialMouseCoords.Y + coords.Y;
+
+                // MouseSim.MoveMouseTo(x, y);
+                int sensitivity = 3;
+                MouseSim.MoveMouseBy((coords.X * -1) / sensitivity, (coords.Y * -1) / sensitivity);
+                // MouseSim.MoveMouseToPositionOnVirtualDesktop(coords.X, coords.Y);
 
                 Response reply = new Response { Received = true };
                 await responseStream.WriteAsync(reply);
