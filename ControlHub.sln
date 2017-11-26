@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHub", "ControlHub\ControlHub.csproj", "{DBE932CC-7F06-4E93-BE28-2F69B537FFA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlHubClient", "ControlHubClient\ControlHubClient.csproj", "{4B4EB83E-F4BD-4198-868D-5801EDDA73AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViGEmClient", "..\..\..\Downloads\linkedin_scrape\ViGEm-master\NET\ViGEmClient\ViGEmClient.csproj", "{AA18EBCF-7E9D-4BC5-8760-E8C6E9A773E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubServer", "ControlHubServer\ControlHubServer.csproj", "{ECE0977E-B4C3-4660-9F78-012AA2A12924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViGEmClientTest", "ViGEmClientTest\ViGEmClientTest.csproj", "{12E11542-0CF3-476C-9EF3-880F6F6FFD54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketService", "SocketService\SocketService.csproj", "{FA6F53C8-13D4-4249-B6FD-D8E21F6845FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsInput", "WindowsInput\WindowsInput.csproj", "{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +21,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DBE932CC-7F06-4E93-BE28-2F69B537FFA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBE932CC-7F06-4E93-BE28-2F69B537FFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBE932CC-7F06-4E93-BE28-2F69B537FFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBE932CC-7F06-4E93-BE28-2F69B537FFA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B4EB83E-F4BD-4198-868D-5801EDDA73AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4EB83E-F4BD-4198-868D-5801EDDA73AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4EB83E-F4BD-4198-868D-5801EDDA73AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4EB83E-F4BD-4198-868D-5801EDDA73AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA18EBCF-7E9D-4BC5-8760-E8C6E9A773E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA18EBCF-7E9D-4BC5-8760-E8C6E9A773E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA18EBCF-7E9D-4BC5-8760-E8C6E9A773E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA18EBCF-7E9D-4BC5-8760-E8C6E9A773E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE0977E-B4C3-4660-9F78-012AA2A12924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE0977E-B4C3-4660-9F78-012AA2A12924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE0977E-B4C3-4660-9F78-012AA2A12924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE0977E-B4C3-4660-9F78-012AA2A12924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E11542-0CF3-476C-9EF3-880F6F6FFD54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E11542-0CF3-476C-9EF3-880F6F6FFD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E11542-0CF3-476C-9EF3-880F6F6FFD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E11542-0CF3-476C-9EF3-880F6F6FFD54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6F53C8-13D4-4249-B6FD-D8E21F6845FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6F53C8-13D4-4249-B6FD-D8E21F6845FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6F53C8-13D4-4249-B6FD-D8E21F6845FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6F53C8-13D4-4249-B6FD-D8E21F6845FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F0902F3-FF5A-4871-8C4C-90C022DFEE28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

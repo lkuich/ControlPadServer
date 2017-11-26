@@ -1,0 +1,53 @@
+﻿syntax = "proto3";
+
+package service;
+
+service Keyboard {
+  rpc PressKey (stream Key) returns(stream Response) {}
+}
+
+service Mouse {
+  rpc MoveMouse (stream MouseCoords) returns(stream Response) {}
+}
+
+service XboxButtons {
+  rpc PressXboxButton (stream XboxButton) returns(stream Response) {}
+  rpc DepressXboxButton (stream XboxButton) returns(stream Response) {}
+  rpc XboxLeftTrigger (stream XboxTrigger) returns(stream Response) {}
+  rpc XboxRightTrigger (stream XboxTrigger) returns(stream Response) {}
+}
+
+service XboxLeftThumbAxis {
+  rpc XboxLeftThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
+}
+
+service XboxRightThumbAxis {
+  rpc XboxRightThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
+}
+
+message XboxTrigger {
+	int32 pressure = 1;
+}
+
+message XboxThumbAxis {
+	int32 x = 1;
+	int32 y = 2;
+}
+
+message XboxButton {
+	uint32 id = 1;
+}
+
+message Key {
+  uint32 firstId = 1;
+  uint32 secondId = 2;
+}
+
+message MouseCoords {
+  int32 x = 1;
+  int32 y = 2;
+}
+
+message Response {
+  bool received = 1;
+}
