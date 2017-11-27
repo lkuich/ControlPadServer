@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubDesktop", "Contro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlHubServer", "ControlHubServer\ControlHubServer.csproj", "{1142141A-255D-4526-8B81-532920F5FDCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BroadcastServer", "BroadcastServer\BroadcastServer.csproj", "{A76D45D8-B25D-4953-A82F-69683069605A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{1142141A-255D-4526-8B81-532920F5FDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1142141A-255D-4526-8B81-532920F5FDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1142141A-255D-4526-8B81-532920F5FDCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A76D45D8-B25D-4953-A82F-69683069605A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A76D45D8-B25D-4953-A82F-69683069605A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A76D45D8-B25D-4953-A82F-69683069605A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A76D45D8-B25D-4953-A82F-69683069605A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

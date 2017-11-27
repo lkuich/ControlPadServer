@@ -8,7 +8,6 @@ service StandardInput {
 }
 
 service XboxButtons {
-  rpc VerifyConnection (XboxButton) returns (Response) {}
   rpc PressXboxButton (stream XboxButton) returns(stream Response) {}
   rpc DepressXboxButton (stream XboxButton) returns(stream Response) {}
   rpc XboxLeftTrigger (stream XboxTrigger) returns(stream Response) {}
@@ -16,6 +15,15 @@ service XboxButtons {
 
   rpc XboxLeftThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
   rpc XboxRightThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
+}
+
+service ConnectionHelpers {
+  rpc Broadcast (BroadcastAddress) returns (Response) {}
+  rpc VerifyConnection (XboxButton) returns (Response) {}
+}
+
+message BroadcastAddress {
+  string ip = 1;
 }
 
 message XboxTrigger {

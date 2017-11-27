@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,14 +21,15 @@ namespace ControlHubDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-
         private bool WindowRendered { get; set; }
         private ControlHubServer.ControlHubServer Server { get; set; }
+        private BroadcastServer BroadcastServer { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             Server = new ControlHubServer.ControlHubServer();
+            BroadcastServer = new BroadcastServer();
         }
         
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -36,7 +38,10 @@ namespace ControlHubDesktop
             comboNetworks.ItemsSource = Network.GetLocalAddresses();
             comboNetworks.SelectedIndex = 0;
 
-            Server.Host = comboNetworks.SelectedValue.ToString();
+            string selectedHost = comboNetworks.SelectedValue.ToString();
+            BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
+
+            Server.Host = "";
             Server.Start(GetInputType());
 
             WindowRendered = true;
