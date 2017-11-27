@@ -28,6 +28,7 @@ namespace ControlHubServer
 
     public class ControlHubServer
     {
+        public bool ServerStarted { get; set; }
         public string Host { get; set; }
         public int Port { get; private set; }
 
@@ -69,12 +70,14 @@ namespace ControlHubServer
             }
 
             server.Start();
+            ServerStarted = true;
         }
 
         public async void Stop()
         {
             X360Controller.Disconnect();
             await server.ShutdownAsync();
+            ServerStarted = false;
         }
     }
 }

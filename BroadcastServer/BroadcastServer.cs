@@ -89,6 +89,11 @@ public class BroadcastServer
         UdpClient = new UdpClient(Port);
     }
 
+    public void StopBroadcast()
+    {
+        //ClientRecieved = true; // falsely tell the sever we recieved confirmation
+    }
+
     public void StartBroadcast(IPAddress localAddress)
     {
         // Start listening for responses on new thread
@@ -122,6 +127,5 @@ public class BroadcastServer
                 ClientRecieved = true;
             }
         }, new object());
-
     }
 }

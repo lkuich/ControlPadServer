@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace ControlHubDesktop
     public partial class MainWindow : Window
     {
         private bool WindowRendered { get; set; }
+
         private ControlHubServer.ControlHubServer Server { get; set; }
         private BroadcastServer BroadcastServer { get; set; }
 
@@ -39,30 +41,43 @@ namespace ControlHubDesktop
             comboNetworks.SelectedIndex = 0;
 
             string selectedHost = comboNetworks.SelectedValue.ToString();
-            BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
+            new Thread(() =>
+            {
+                BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
 
-            Server.Host = "";
-            Server.Start(GetInputType());
-
+                Server.Host = selectedHost;
+                Server.Start(GetInputType());
+            });
+            
             WindowRendered = true;
         }
 
         private ControlHubServer.InputType GetInputType()
         {
-            if (radioXbox.IsChecked.Value)
-                return ControlHubServer.InputType.XBOX;
-            else if (radioMouseKeyboard.IsChecked.Value)
-                return ControlHubServer.InputType.STANDARD;
+            var inputType = ControlHubServer.InputType.DIRECTINPUT;
+            Application.Current.Dispatcher.Invoke(new Action(() => {
+                if (radioXbox.IsChecked.Value)
+                    inputType = ControlHubServer.InputType.XBOX;
+                else if (radioMouseKeyboard.IsChecked.Value)
+                    inputType = ControlHubServer.InputType.STANDARD;
+            }));            
 
-            return ControlHubServer.InputType.DIRECTINPUT;
+            return inputType;
         }
 
         private void RestartServer(string ip)
         {
-            Server.Stop();
+            if (Server.ServerStarted)
+                Server.Stop();
+            
+            new Thread(() =>
+            {
+                BroadcastServer.StopBroadcast();
+                BroadcastServer.StartBroadcast(IPAddress.Parse(ip));
 
-            Server.Host = ip;
-            Server.Start(GetInputType());
+                Server.Host = ip;
+                Server.Start(GetInputType());
+            }).Start();
         }
 
         private void comboNetworks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -79,8 +94,11 @@ namespace ControlHubDesktop
                 return;
             var ip = comboNetworks.SelectedValue.ToString();
 
-            Server.X360Controller.Connect();
-            RestartServer(ip);
+            if (Server.ServerStarted)
+            {
+                Server.X360Controller.Connect();
+                RestartServer(ip);
+            }
         }
 
         private void radioMouseKeyboard_Checked(object sender, RoutedEventArgs e)

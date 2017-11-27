@@ -111,6 +111,10 @@
       <Project>{aa18ebcf-7e9d-4bc5-8760-e8c6e9a773e5}</Project>
       <Name>ViGEmClient</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BroadcastServer\BroadcastServer.csproj">
+      <Project>{a76d45d8-b25d-4953-a82f-69683069605a}</Project>
+      <Name>BroadcastServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControlHubServer\ControlHubServer.csproj">
       <Project>{1142141a-255d-4526-8b81-532920f5fdcf}</Project>
       <Name>ControlHubServer</Name>
