@@ -24,8 +24,7 @@ namespace ControlHubServer
         public readonly static bool BUTTON_TOGGLE = false;
         public readonly static InputType INPUT_TYPE = InputType.XBOX;
     }
-
-
+    
     public class ControlHubServer
     {
         public bool ServerStarted { get; set; }

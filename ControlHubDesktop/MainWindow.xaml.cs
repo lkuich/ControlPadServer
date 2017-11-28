@@ -72,11 +72,15 @@ namespace ControlHubDesktop
             
             new Thread(() =>
             {
-                BroadcastServer.StopBroadcast();
-                BroadcastServer.StartBroadcast(IPAddress.Parse(ip));
+                while (true)
+                {
+                    BroadcastServer.StartBroadcast(IPAddress.Parse(ip));
 
-                Server.Host = ip;
-                Server.Start(GetInputType());
+                    Server.Host = ip;
+                    Server.Start(GetInputType());
+
+                    BroadcastServer = new BroadcastServer();
+                }
             }).Start();
         }
 

@@ -82,7 +82,7 @@ public class BroadcastServer
     private readonly int Port = 58384;
     private UdpClient UdpClient { get; set; }
     private bool ClientRecieved { get; set; }
-    
+
     // Broadcasts IP
     public BroadcastServer()
     {
@@ -91,17 +91,15 @@ public class BroadcastServer
 
     public void StopBroadcast()
     {
-        //ClientRecieved = true; // falsely tell the sever we recieved confirmation
+        ClientRecieved = true; // falsely tell the sever we recieved confirmation
     }
 
     public void StartBroadcast(IPAddress localAddress)
     {
-        // Start listening for responses on new thread
-        Thread recieverThread = new Thread(() =>
+        new Thread(() =>
         {
             Listen(localAddress);
-        });
-        recieverThread.Start();
+        }).Start();
 
         IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, Port);
         byte[] bytes = Encoding.ASCII.GetBytes(localAddress.ToString());
@@ -118,13 +116,16 @@ public class BroadcastServer
         var endPoint = new IPEndPoint(localAddress, Port);
         UdpClient.BeginReceive((IAsyncResult ar) =>
         {
-            byte[] bytes = UdpClient.EndReceive(ar, ref endPoint);
-            string message = Encoding.ASCII.GetString(bytes);
-            if (message != "recieved")
-                Listen(localAddress);
-            else
+            if (!ClientRecieved)
             {
-                ClientRecieved = true;
+                byte[] bytes = UdpClient.EndReceive(ar, ref endPoint);
+                string message = Encoding.ASCII.GetString(bytes);
+                if (message != "recieved")
+                    Listen(localAddress);
+                else
+                {
+                    ClientRecieved = true;
+                }
             }
         }, new object());
     }
