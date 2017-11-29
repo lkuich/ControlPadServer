@@ -38,16 +38,16 @@ namespace ControlHubDesktop
         {
             // Get list of networks
             comboNetworks.ItemsSource = Network.GetLocalAddresses();
-            comboNetworks.SelectedIndex = 0;
+            comboNetworks.SelectedIndex = 2;
 
             string selectedHost = comboNetworks.SelectedValue.ToString();
             new Thread(() =>
             {
                 BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
 
-                Server.Host = selectedHost;
+                Server.Host = selectedHost; 
                 Server.Start(GetInputType());
-            });
+            }).Start();
             
             WindowRendered = true;
         }

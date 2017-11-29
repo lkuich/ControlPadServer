@@ -40,10 +40,10 @@ namespace Service {
             "ChFYYm94TGVmdFRodW1iQXhpcxIWLnNlcnZpY2UuWGJveFRodW1iQXhpcxoR",
             "LnNlcnZpY2UuUmVzcG9uc2UiACgBMAESRQoSWGJveFJpZ2h0VGh1bWJBeGlz",
             "EhYuc2VydmljZS5YYm94VGh1bWJBeGlzGhEuc2VydmljZS5SZXNwb25zZSIA",
-            "KAEwATKOAQoRQ29ubmVjdGlvbkhlbHBlcnMSOwoJQnJvYWRjYXN0Ehkuc2Vy",
-            "dmljZS5Ccm9hZGNhc3RBZGRyZXNzGhEuc2VydmljZS5SZXNwb25zZSIAEjwK",
-            "EFZlcmlmeUNvbm5lY3Rpb24SEy5zZXJ2aWNlLlhib3hCdXR0b24aES5zZXJ2",
-            "aWNlLlJlc3BvbnNlIgBiBnByb3RvMw=="));
+            "KAEwATKZAQoRQ29ubmVjdGlvbkhlbHBlcnMSQAoUVmVyaWZ5WGJveENvbm5l",
+            "Y3Rpb24SEy5zZXJ2aWNlLlhib3hCdXR0b24aES5zZXJ2aWNlLlJlc3BvbnNl",
+            "IgASQgoYVmVyaWZ5U3RhbmRhcmRDb25uZWN0aW9uEhEuc2VydmljZS5SZXNw",
+            "b25zZRoRLnNlcnZpY2UuUmVzcG9uc2UiAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

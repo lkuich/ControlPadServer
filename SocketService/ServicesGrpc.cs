@@ -296,22 +296,21 @@ namespace Service {
   {
     static readonly string __ServiceName = "service.ConnectionHelpers";
 
-    static readonly grpc::Marshaller<global::Service.BroadcastAddress> __Marshaller_BroadcastAddress = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.BroadcastAddress.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.XboxButton> __Marshaller_XboxButton = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxButton.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Service.BroadcastAddress, global::Service.Response> __Method_Broadcast = new grpc::Method<global::Service.BroadcastAddress, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxButton, global::Service.Response> __Method_VerifyXboxConnection = new grpc::Method<global::Service.XboxButton, global::Service.Response>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "Broadcast",
-        __Marshaller_BroadcastAddress,
+        "VerifyXboxConnection",
+        __Marshaller_XboxButton,
         __Marshaller_Response);
 
-    static readonly grpc::Method<global::Service.XboxButton, global::Service.Response> __Method_VerifyConnection = new grpc::Method<global::Service.XboxButton, global::Service.Response>(
+    static readonly grpc::Method<global::Service.Response, global::Service.Response> __Method_VerifyStandardConnection = new grpc::Method<global::Service.Response, global::Service.Response>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "VerifyConnection",
-        __Marshaller_XboxButton,
+        "VerifyStandardConnection",
+        __Marshaller_Response,
         __Marshaller_Response);
 
     /// <summary>Service descriptor</summary>
@@ -323,12 +322,12 @@ namespace Service {
     /// <summary>Base class for server-side implementations of ConnectionHelpers</summary>
     public abstract partial class ConnectionHelpersBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::Service.Response> Broadcast(global::Service.BroadcastAddress request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Service.Response> VerifyXboxConnection(global::Service.XboxButton request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::Service.Response> VerifyConnection(global::Service.XboxButton request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Service.Response> VerifyStandardConnection(global::Service.Response request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -358,37 +357,37 @@ namespace Service {
       {
       }
 
-      public virtual global::Service.Response Broadcast(global::Service.BroadcastAddress request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Service.Response VerifyXboxConnection(global::Service.XboxButton request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
-        return Broadcast(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return VerifyXboxConnection(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Service.Response Broadcast(global::Service.BroadcastAddress request, grpc::CallOptions options)
+      public virtual global::Service.Response VerifyXboxConnection(global::Service.XboxButton request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_Broadcast, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_VerifyXboxConnection, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Service.Response> BroadcastAsync(global::Service.BroadcastAddress request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Service.Response> VerifyXboxConnectionAsync(global::Service.XboxButton request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
-        return BroadcastAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return VerifyXboxConnectionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Service.Response> BroadcastAsync(global::Service.BroadcastAddress request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Service.Response> VerifyXboxConnectionAsync(global::Service.XboxButton request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_Broadcast, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_VerifyXboxConnection, null, options, request);
       }
-      public virtual global::Service.Response VerifyConnection(global::Service.XboxButton request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual global::Service.Response VerifyStandardConnection(global::Service.Response request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
-        return VerifyConnection(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return VerifyStandardConnection(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Service.Response VerifyConnection(global::Service.XboxButton request, grpc::CallOptions options)
+      public virtual global::Service.Response VerifyStandardConnection(global::Service.Response request, grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_VerifyConnection, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_VerifyStandardConnection, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Service.Response> VerifyConnectionAsync(global::Service.XboxButton request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Service.Response> VerifyStandardConnectionAsync(global::Service.Response request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
-        return VerifyConnectionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return VerifyStandardConnectionAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Service.Response> VerifyConnectionAsync(global::Service.XboxButton request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Service.Response> VerifyStandardConnectionAsync(global::Service.Response request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncUnaryCall(__Method_VerifyConnection, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_VerifyStandardConnection, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ConnectionHelpersClient NewInstance(ClientBaseConfiguration configuration)
@@ -402,8 +401,8 @@ namespace Service {
     public static grpc::ServerServiceDefinition BindService(ConnectionHelpersBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Broadcast, serviceImpl.Broadcast)
-          .AddMethod(__Method_VerifyConnection, serviceImpl.VerifyConnection).Build();
+          .AddMethod(__Method_VerifyXboxConnection, serviceImpl.VerifyXboxConnection)
+          .AddMethod(__Method_VerifyStandardConnection, serviceImpl.VerifyStandardConnection).Build();
     }
 
   }

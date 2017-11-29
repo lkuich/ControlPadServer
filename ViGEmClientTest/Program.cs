@@ -17,7 +17,7 @@ namespace ViGEmClientTest
     {
         static void Main(string[] args)
         {
-            var broadcastServer = new BroadcastServer.BroadcastServer(IPAddress.Parse("192.168.1.118"));
+            var broadcastServer = new BroadcastServer(IPAddress.Parse("192.168.1.118"));
             broadcastServer.StartBroadcast();
             
             Console.ReadLine();
