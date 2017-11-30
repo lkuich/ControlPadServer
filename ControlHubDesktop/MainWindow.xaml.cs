@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ControlHubDesktop
 {
@@ -46,23 +35,10 @@ namespace ControlHubDesktop
                 BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
 
                 Server.Host = selectedHost; 
-                Server.Start(GetInputType());
+                Server.Start();
             }).Start();
             
             WindowRendered = true;
-        }
-
-        private ControlHubServer.InputType GetInputType()
-        {
-            var inputType = ControlHubServer.InputType.DIRECTINPUT;
-            Application.Current.Dispatcher.Invoke(new Action(() => {
-                if (radioXbox.IsChecked.Value)
-                    inputType = ControlHubServer.InputType.XBOX;
-                else if (radioMouseKeyboard.IsChecked.Value)
-                    inputType = ControlHubServer.InputType.STANDARD;
-            }));            
-
-            return inputType;
         }
 
         private void RestartServer(string ip)
@@ -77,7 +53,7 @@ namespace ControlHubDesktop
                     BroadcastServer.StartBroadcast(IPAddress.Parse(ip));
 
                     Server.Host = ip;
-                    Server.Start(GetInputType());
+                    Server.Start();
 
                     BroadcastServer = new BroadcastServer();
                 }

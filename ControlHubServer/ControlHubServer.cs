@@ -40,33 +40,20 @@ namespace ControlHubServer
             this.Port = port;
         }
 
-        public void Start(InputType inputType)
+        public void Start()
         {
-            if (inputType == InputType.XBOX)
+            // TODO: Only connect when prompted
+            var client = new ViGEmClient();
+            X360Controller = new Xbox360Controller(client);
+            
+            server = new Server
             {
-                // TODO: Only connect when prompted
-                var client = new ViGEmClient();
-                X360Controller = new Xbox360Controller(client);
-                X360Controller.Connect();
-
-                server = new Server
-                {
-                    Services = {
-                        XboxButtons.BindService(new XboxImpl(X360Controller))
-                    },
-                    Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
-                };
-            }
-            else if (inputType == InputType.STANDARD || inputType == InputType.DIRECTINPUT)
-            {
-                server = new Server
-                {
-                    Services = {
-                        StandardInput.BindService(new StandardInputImpl(inputType))
-                    },
-                    Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
-                };
-            }
+                Services = {
+                    XboxButtons.BindService(new XboxImpl(X360Controller)),
+                    StandardInput.BindService(new StandardInputImpl())
+                },
+                Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
+            };
 
             server.Start();
             ServerStarted = true;

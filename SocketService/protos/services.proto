@@ -18,8 +18,13 @@ service XboxButtons {
 }
 
 service ConnectionHelpers {
+  rpc UpdateConfiguration (Configuration) returns (Response) {}
   rpc VerifyXboxConnection (XboxButton) returns (Response) {}
   rpc VerifyStandardConnection (Response) returns (Response) {}
+}
+
+message Configuration {
+  int32 type = 1;
 }
 
 message BroadcastAddress {

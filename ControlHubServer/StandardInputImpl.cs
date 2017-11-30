@@ -18,11 +18,11 @@ namespace ControlHubServer
         private KeyboardSimulator KeyboardSim { get; set; }
         private List<VirtualKeyCode> CurrentKeys { get; set; }
 
-        public StandardInputImpl(InputType inputType)
+        public StandardInputImpl()
         {
             var InputSim = new InputSimulator();
             MouseSim = new MouseSimulator(InputSim);
-            KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: inputType == InputType.DIRECTINPUT);
+            KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: true);
             CurrentKeys = new List<VirtualKeyCode>();
         }
 
@@ -34,7 +34,7 @@ namespace ControlHubServer
                 var keys = new VirtualKeyCode[] { (VirtualKeyCode)key.FirstId, key.SecondId == 0 ? (VirtualKeyCode)key.SecondId : 0 };
                 foreach (var k in keys)
                 {
-                    if (k != 0) // Not a blank key
+                    if (k != 0 && (ushort)k != 0x9001) // Not a blank key
                     {
                         if (k == VirtualKeyCode.CANCEL)
                         {

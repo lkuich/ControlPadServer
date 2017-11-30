@@ -29,6 +29,8 @@ namespace ControlHubServer
             while (await buttonStream.MoveNext())
             {
                 var button = buttonStream.Current;
+                if (button.Id == 0x9001 && !X360Controller.IsConneced) // Init
+                    X360Controller.Connect();
 
                 Report.SetButtonState((Xbox360Buttons)button.Id, true);
                 X360Controller.SendReport(Report);
