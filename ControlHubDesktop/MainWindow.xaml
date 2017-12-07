@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ControlHubDesktop"
         mc:Ignorable="d"
-        Title="ControlHub Server" Height="155.203" Width="287.995" Loaded="Window_Loaded">
+        Title="ControlHub Server" Height="155.203" Width="287.995" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
         <ComboBox x:Name="comboNetworks" HorizontalAlignment="Left" Margin="92,55,0,0" VerticalAlignment="Top" Width="170" Height="22" SelectionChanged="comboNetworks_SelectionChanged"/>
         <Label x:Name="lblTitle" Content="ControlHub Server" HorizontalAlignment="Center" Margin="45,10,52,85.778" VerticalAlignment="Center" Height="30" Width="175" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

@@ -26,37 +26,46 @@ namespace ControlHubDesktop
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Get list of networks
-            comboNetworks.ItemsSource = Network.GetLocalAddresses();
-            comboNetworks.SelectedIndex = 2;
-
-            string selectedHost = comboNetworks.SelectedValue.ToString();
-            new Thread(() =>
+            var networks = Network.GetLocalAddresses();
+            comboNetworks.ItemsSource = networks;
+            if (networks.Length > 0)
             {
-                BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
+                comboNetworks.SelectedIndex = 0;
 
-                Server.Host = selectedHost; 
-                Server.Start();
-            }).Start();
-            
-            WindowRendered = true;
+                string selectedHost = comboNetworks.SelectedValue.ToString();
+                new Thread(() =>
+                {
+                    BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
+
+                    Server.Host = selectedHost;
+                    Server.Start();
+                }).Start();
+
+                WindowRendered = true;
+            } else
+            {
+                MessageBox.Show("We couldn't detect your primary network! Ensure you have a network connection and try again.");
+            }
+        }
+
+        private void StopServer()
+        {
+            // Stop will await shutdown, running threads should stop when all stops are called
+
+            BroadcastServer.StopBroadcast();
+            Server.Stop();
         }
 
         private void RestartServer(string ip)
         {
-            if (Server.ServerStarted)
-                Server.Stop();
+            StopServer();
             
             new Thread(() =>
             {
-                while (true)
-                {
-                    BroadcastServer.StartBroadcast(IPAddress.Parse(ip));
+                BroadcastServer.StartBroadcast(IPAddress.Parse(ip));
 
-                    Server.Host = ip;
-                    Server.Start();
-
-                    BroadcastServer = new BroadcastServer();
-                }
+                Server.Host = ip;
+                Server.Start();
             }).Start();
         }
 
@@ -68,33 +77,9 @@ namespace ControlHubDesktop
             RestartServer(ip);
         }
 
-        private void radioXbox_Checked(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
-            if (!WindowRendered)
-                return;
-            var ip = comboNetworks.SelectedValue.ToString();
-
-            if (Server.ServerStarted)
-            {
-                Server.X360Controller.Connect();
-                RestartServer(ip);
-            }
-        }
-
-        private void radioMouseKeyboard_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!WindowRendered)
-                return;
-            var ip = comboNetworks.SelectedValue.ToString();
-            RestartServer(ip);
-        }
-
-        private void radioDirectInput_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!WindowRendered)
-                return;
-            var ip = comboNetworks.SelectedValue.ToString();
-            RestartServer(ip);
+            StopServer();
         }
     }
 }

@@ -61,9 +61,12 @@ namespace ControlHubServer
 
         public async void Stop()
         {
-            X360Controller.Disconnect();
-            await server.ShutdownAsync();
-            ServerStarted = false;
+            if (ServerStarted)
+            {
+                X360Controller.Disconnect();
+                await server.ShutdownAsync();
+                ServerStarted = false;
+            }
         }
     }
 }
