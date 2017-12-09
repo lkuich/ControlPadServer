@@ -9,8 +9,9 @@ using System.Drawing;
 using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Service;
+using ControlHubServer;
 
-namespace ControlHubServer
+namespace ControlHub
 {
     public enum InputType
     {
@@ -23,6 +24,8 @@ namespace ControlHubServer
     {
         public readonly static bool BUTTON_TOGGLE = false;
         public readonly static InputType INPUT_TYPE = InputType.XBOX;
+        public readonly static string DEFAULT_HOST = "localhost";
+        public readonly static int DEFAULT_PORT = 50051;
     }
     
     public class ControlHubServer
@@ -67,6 +70,17 @@ namespace ControlHubServer
                 await server.ShutdownAsync();
                 ServerStarted = false;
             }
+        }
+    }
+
+    public class ControlHubClient
+    {
+        private ClientBase StandardClient;
+        public ControlHubClient()
+        {
+            var client = new Channel("localhost", 50051, ChannelCredentials.Insecure);
+            StandardClient = new StandardInput.StandardInputClient(client);
+            
         }
     }
 }

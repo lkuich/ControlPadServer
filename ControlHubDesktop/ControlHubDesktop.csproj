@@ -115,9 +115,9 @@
       <Project>{a76d45d8-b25d-4953-a82f-69683069605a}</Project>
       <Name>BroadcastServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ControlHubServer\ControlHubServer.csproj">
+    <ProjectReference Include="..\ControlHubServer\ControlHub.csproj">
       <Project>{1142141a-255d-4526-8b81-532920f5fdcf}</Project>
-      <Name>ControlHubServer</Name>
+      <Name>ControlHub</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocketService\SocketService.csproj">
       <Project>{fa6f53c8-13d4-4249-b6fd-d8e21f6845fd}</Project>

@@ -11,7 +11,7 @@ using Nefarius.ViGEm.Client.Targets.Xbox360;
 using Service;
 using System.Drawing;
 
-namespace ControlHubServer
+namespace ControlHub
 {
     class XboxImpl : XboxButtons.XboxButtonsBase
     {

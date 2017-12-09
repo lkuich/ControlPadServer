@@ -10,7 +10,7 @@ using WindowsInput.Native;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ControlHubServer
+namespace ControlHub
 {
     class StandardInputImpl : StandardInput.StandardInputBase
     {
