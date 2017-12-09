@@ -115,12 +115,8 @@ public class BroadcastServer
             {
                 byte[] bytes = UdpClient.EndReceive(ar, ref endPoint);
                 string message = Encoding.ASCII.GetString(bytes);
-                if (message != "recieved")
-                    Listen(localAddress);
-                else
-                {
-                    ClientRecieved = true;
-                }
+
+                Listen(localAddress);
             }
         }, new object());
     }
