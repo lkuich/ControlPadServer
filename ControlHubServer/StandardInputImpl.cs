@@ -41,10 +41,14 @@ namespace ControlHubServer
                             foreach (var downKey in CurrentKeys)
                             {
                                 KeyboardSim.KeyUp(downKey);
+                                if (downKey == VirtualKeyCode.LBUTTON)
+                                    MouseSim.LeftButtonUp();
+                                else if (downKey == VirtualKeyCode.RBUTTON)
+                                    MouseSim.RightButtonUp();
                             }
                             CurrentKeys.Clear();
                         }
-                        else if (k == VirtualKeyCode.VK_W || k == VirtualKeyCode.VK_A || k == VirtualKeyCode.VK_S || k == VirtualKeyCode.VK_D) // Directional
+                        else if (k == VirtualKeyCode.VK_W || k == VirtualKeyCode.VK_A || k == VirtualKeyCode.VK_S || k == VirtualKeyCode.VK_D) // Directional, Mouse keys
                         {
                             if (CurrentKeys.Count > 1)
                             {
@@ -56,6 +60,14 @@ namespace ControlHubServer
                             }
                             CurrentKeys.Add(k);
                             KeyboardSim.KeyDown(k);
+                        }
+                        else if (k == VirtualKeyCode.LBUTTON)
+                        {
+                            MouseSim.LeftButtonDown();
+                        }
+                        else if (k == VirtualKeyCode.RBUTTON)
+                        {
+                            MouseSim.RightButtonDown();
                         }
                         else // Treat as a button
                         {
