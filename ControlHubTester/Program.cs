@@ -11,6 +11,8 @@ namespace ControlHubTester
     {
         static void Main(string[] args)
         {
+            new ControlHub.ControlHubClient();
+
         }
     }
 }

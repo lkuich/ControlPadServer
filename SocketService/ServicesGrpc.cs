@@ -296,8 +296,16 @@ namespace Service {
   {
     static readonly string __ServiceName = "service.ConnectionHelpers";
 
-    static readonly grpc::Marshaller<global::Service.XboxButton> __Marshaller_XboxButton = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxButton.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.Configuration> __Marshaller_Configuration = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Configuration.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.XboxButton> __Marshaller_XboxButton = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxButton.Parser.ParseFrom);
+
+    static readonly grpc::Method<global::Service.Configuration, global::Service.Response> __Method_UpdateConfiguration = new grpc::Method<global::Service.Configuration, global::Service.Response>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateConfiguration",
+        __Marshaller_Configuration,
+        __Marshaller_Response);
 
     static readonly grpc::Method<global::Service.XboxButton, global::Service.Response> __Method_VerifyXboxConnection = new grpc::Method<global::Service.XboxButton, global::Service.Response>(
         grpc::MethodType.Unary,
@@ -322,6 +330,11 @@ namespace Service {
     /// <summary>Base class for server-side implementations of ConnectionHelpers</summary>
     public abstract partial class ConnectionHelpersBase
     {
+      public virtual global::System.Threading.Tasks.Task<global::Service.Response> UpdateConfiguration(global::Service.Configuration request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
       public virtual global::System.Threading.Tasks.Task<global::Service.Response> VerifyXboxConnection(global::Service.XboxButton request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -357,6 +370,22 @@ namespace Service {
       {
       }
 
+      public virtual global::Service.Response UpdateConfiguration(global::Service.Configuration request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return UpdateConfiguration(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Service.Response UpdateConfiguration(global::Service.Configuration request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_UpdateConfiguration, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Service.Response> UpdateConfigurationAsync(global::Service.Configuration request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return UpdateConfigurationAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Service.Response> UpdateConfigurationAsync(global::Service.Configuration request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_UpdateConfiguration, null, options, request);
+      }
       public virtual global::Service.Response VerifyXboxConnection(global::Service.XboxButton request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return VerifyXboxConnection(request, new grpc::CallOptions(headers, deadline, cancellationToken));
@@ -401,6 +430,7 @@ namespace Service {
     public static grpc::ServerServiceDefinition BindService(ConnectionHelpersBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_UpdateConfiguration, serviceImpl.UpdateConfiguration)
           .AddMethod(__Method_VerifyXboxConnection, serviceImpl.VerifyXboxConnection)
           .AddMethod(__Method_VerifyStandardConnection, serviceImpl.VerifyStandardConnection).Build();
     }

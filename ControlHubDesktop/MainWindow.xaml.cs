@@ -13,13 +13,13 @@ namespace ControlHubDesktop
     {
         private bool WindowRendered { get; set; }
 
-        private ControlHubServer.ControlHub Server { get; set; }
+        private ControlHub.ControlHubServer Server { get; set; }
         private BroadcastServer BroadcastServer { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            Server = new ControlHubServer.ControlHub();
+            Server = new ControlHub.ControlHubServer();
             BroadcastServer = new BroadcastServer();
         }
         

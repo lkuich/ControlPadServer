@@ -22,31 +22,34 @@ namespace Service {
     static ServicesReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5zZXJ2aWNlcy5wcm90bxIHc2VydmljZSIeChBCcm9hZGNhc3RBZGRyZXNz",
-            "EgoKAmlwGAEgASgJIh8KC1hib3hUcmlnZ2VyEhAKCHByZXNzdXJlGAEgASgF",
-            "IiUKDVhib3hUaHVtYkF4aXMSCQoBeBgBIAEoBRIJCgF5GAIgASgFIhgKClhi",
-            "b3hCdXR0b24SCgoCaWQYASABKA0iKAoDS2V5Eg8KB2ZpcnN0SWQYASABKA0S",
-            "EAoIc2Vjb25kSWQYAiABKA0iIwoLTW91c2VDb29yZHMSCQoBeBgBIAEoBRIJ",
-            "CgF5GAIgASgFIhwKCFJlc3BvbnNlEhAKCHJlY2VpdmVkGAEgASgIMn4KDVN0",
-            "YW5kYXJkSW5wdXQSMQoIUHJlc3NLZXkSDC5zZXJ2aWNlLktleRoRLnNlcnZp",
-            "Y2UuUmVzcG9uc2UiACgBMAESOgoJTW92ZU1vdXNlEhQuc2VydmljZS5Nb3Vz",
-            "ZUNvb3JkcxoRLnNlcnZpY2UuUmVzcG9uc2UiACgBMAEyowMKC1hib3hCdXR0",
-            "b25zEj8KD1ByZXNzWGJveEJ1dHRvbhITLnNlcnZpY2UuWGJveEJ1dHRvbhoR",
-            "LnNlcnZpY2UuUmVzcG9uc2UiACgBMAESQQoRRGVwcmVzc1hib3hCdXR0b24S",
-            "Ey5zZXJ2aWNlLlhib3hCdXR0b24aES5zZXJ2aWNlLlJlc3BvbnNlIgAoATAB",
-            "EkAKD1hib3hMZWZ0VHJpZ2dlchIULnNlcnZpY2UuWGJveFRyaWdnZXIaES5z",
-            "ZXJ2aWNlLlJlc3BvbnNlIgAoATABEkEKEFhib3hSaWdodFRyaWdnZXISFC5z",
-            "ZXJ2aWNlLlhib3hUcmlnZ2VyGhEuc2VydmljZS5SZXNwb25zZSIAKAEwARJE",
-            "ChFYYm94TGVmdFRodW1iQXhpcxIWLnNlcnZpY2UuWGJveFRodW1iQXhpcxoR",
-            "LnNlcnZpY2UuUmVzcG9uc2UiACgBMAESRQoSWGJveFJpZ2h0VGh1bWJBeGlz",
-            "EhYuc2VydmljZS5YYm94VGh1bWJBeGlzGhEuc2VydmljZS5SZXNwb25zZSIA",
-            "KAEwATKZAQoRQ29ubmVjdGlvbkhlbHBlcnMSQAoUVmVyaWZ5WGJveENvbm5l",
-            "Y3Rpb24SEy5zZXJ2aWNlLlhib3hCdXR0b24aES5zZXJ2aWNlLlJlc3BvbnNl",
-            "IgASQgoYVmVyaWZ5U3RhbmRhcmRDb25uZWN0aW9uEhEuc2VydmljZS5SZXNw",
-            "b25zZRoRLnNlcnZpY2UuUmVzcG9uc2UiAGIGcHJvdG8z"));
+            "Cg5zZXJ2aWNlcy5wcm90bxIHc2VydmljZSIdCg1Db25maWd1cmF0aW9uEgwK",
+            "BHR5cGUYASABKAUiHgoQQnJvYWRjYXN0QWRkcmVzcxIKCgJpcBgBIAEoCSIf",
+            "CgtYYm94VHJpZ2dlchIQCghwcmVzc3VyZRgBIAEoBSIlCg1YYm94VGh1bWJB",
+            "eGlzEgkKAXgYASABKAUSCQoBeRgCIAEoBSIYCgpYYm94QnV0dG9uEgoKAmlk",
+            "GAEgASgNIigKA0tleRIPCgdmaXJzdElkGAEgASgNEhAKCHNlY29uZElkGAIg",
+            "ASgNIiMKC01vdXNlQ29vcmRzEgkKAXgYASABKAUSCQoBeRgCIAEoBSIcCghS",
+            "ZXNwb25zZRIQCghyZWNlaXZlZBgBIAEoCDJ+Cg1TdGFuZGFyZElucHV0EjEK",
+            "CFByZXNzS2V5Egwuc2VydmljZS5LZXkaES5zZXJ2aWNlLlJlc3BvbnNlIgAo",
+            "ATABEjoKCU1vdmVNb3VzZRIULnNlcnZpY2UuTW91c2VDb29yZHMaES5zZXJ2",
+            "aWNlLlJlc3BvbnNlIgAoATABMqMDCgtYYm94QnV0dG9ucxI/Cg9QcmVzc1hi",
+            "b3hCdXR0b24SEy5zZXJ2aWNlLlhib3hCdXR0b24aES5zZXJ2aWNlLlJlc3Bv",
+            "bnNlIgAoATABEkEKEURlcHJlc3NYYm94QnV0dG9uEhMuc2VydmljZS5YYm94",
+            "QnV0dG9uGhEuc2VydmljZS5SZXNwb25zZSIAKAEwARJACg9YYm94TGVmdFRy",
+            "aWdnZXISFC5zZXJ2aWNlLlhib3hUcmlnZ2VyGhEuc2VydmljZS5SZXNwb25z",
+            "ZSIAKAEwARJBChBYYm94UmlnaHRUcmlnZ2VyEhQuc2VydmljZS5YYm94VHJp",
+            "Z2dlchoRLnNlcnZpY2UuUmVzcG9uc2UiACgBMAESRAoRWGJveExlZnRUaHVt",
+            "YkF4aXMSFi5zZXJ2aWNlLlhib3hUaHVtYkF4aXMaES5zZXJ2aWNlLlJlc3Bv",
+            "bnNlIgAoATABEkUKElhib3hSaWdodFRodW1iQXhpcxIWLnNlcnZpY2UuWGJv",
+            "eFRodW1iQXhpcxoRLnNlcnZpY2UuUmVzcG9uc2UiACgBMAEy3QEKEUNvbm5l",
+            "Y3Rpb25IZWxwZXJzEkIKE1VwZGF0ZUNvbmZpZ3VyYXRpb24SFi5zZXJ2aWNl",
+            "LkNvbmZpZ3VyYXRpb24aES5zZXJ2aWNlLlJlc3BvbnNlIgASQAoUVmVyaWZ5",
+            "WGJveENvbm5lY3Rpb24SEy5zZXJ2aWNlLlhib3hCdXR0b24aES5zZXJ2aWNl",
+            "LlJlc3BvbnNlIgASQgoYVmVyaWZ5U3RhbmRhcmRDb25uZWN0aW9uEhEuc2Vy",
+            "dmljZS5SZXNwb25zZRoRLnNlcnZpY2UuUmVzcG9uc2UiAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Service.Configuration), global::Service.Configuration.Parser, new[]{ "Type" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Service.BroadcastAddress), global::Service.BroadcastAddress.Parser, new[]{ "Ip" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Service.XboxTrigger), global::Service.XboxTrigger.Parser, new[]{ "Pressure" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Service.XboxThumbAxis), global::Service.XboxThumbAxis.Parser, new[]{ "X", "Y" }, null, null, null),
@@ -60,6 +63,123 @@ namespace Service {
 
   }
   #region Messages
+  public sealed partial class Configuration : pb::IMessage<Configuration> {
+    private static readonly pb::MessageParser<Configuration> _parser = new pb::MessageParser<Configuration>(() => new Configuration());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Configuration> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Configuration() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Configuration(Configuration other) : this() {
+      type_ = other.type_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Configuration Clone() {
+      return new Configuration(this);
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 1;
+    private int type_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Configuration);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Configuration other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Type != other.Type) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Type != 0) hash ^= Type.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Type);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Configuration other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Type = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class BroadcastAddress : pb::IMessage<BroadcastAddress> {
     private static readonly pb::MessageParser<BroadcastAddress> _parser = new pb::MessageParser<BroadcastAddress>(() => new BroadcastAddress());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -67,7 +187,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -184,7 +304,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -301,7 +421,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -446,7 +566,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -563,7 +683,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -708,7 +828,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -853,7 +973,7 @@ namespace Service {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Service.ServicesReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

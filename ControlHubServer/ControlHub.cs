@@ -9,6 +9,8 @@ using System.Drawing;
 using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Service;
+using WindowsInput;
+using WindowsInput.Native;
 using ControlHubServer;
 
 namespace ControlHub
@@ -75,12 +77,59 @@ namespace ControlHub
 
     public class ControlHubClient
     {
-        private ClientBase StandardClient;
-        public ControlHubClient()
+        public string Host { get; private set; }
+        public int Port { get; private set; }
+
+        private StandardInput.StandardInputClient StandardInputClient { get; set; }
+        private Channel channel;
+
+        public ControlHubClient(string host = "localhost", int port = 50051)
         {
-            var client = new Channel("localhost", 50051, ChannelCredentials.Insecure);
-            StandardClient = new StandardInput.StandardInputClient(client);
-            
+            this.Host = host;
+            this.Port = port;
+
+            this.channel = new Channel(this.Host, this.Port, ChannelCredentials.Insecure);
+            StandardInputClient = new StandardInput.StandardInputClient(channel);
+
+            var InputSim = new InputSimulator();
+            var MouseSim = new MouseSimulator(InputSim);
+            var KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: true);
+
+            Console.WriteLine("0 for left, 1 for right");
+            while (true)
+            {
+                var input = Console.ReadLine();
+                if (input == "exit")
+                    return;
+                else if (input == "0")
+                {
+                    // MouseSim.LeftButtonClick();
+                    MouseSim.LeftButtonDown();
+                    MouseSim.LeftButtonUp();
+                }
+                else if (input == "1")
+                {
+                    MouseSim.RightButtonDown();
+                    MouseSim.RightButtonUp();
+                }
+            }
+        }
+
+        public void PressKey(uint keyCode)
+        {
+            var k = new Key() { FirstId = keyCode };
+
+            // StandardInputClient.PressKey()
+        }
+
+        public void MoveMouse(int x, int y)
+        {
+            // StandardInputClient.MoveMouse(new MouseCoords() { X = x, Y = y });
+        }
+
+        public void Close()
+        {
+            channel.ShutdownAsync().Wait();
         }
     }
 }
