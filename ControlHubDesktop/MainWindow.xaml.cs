@@ -20,14 +20,7 @@ namespace ControlHubDesktop
         {
             InitializeComponent();
             Server = new ControlHub.ControlHubServer();
-            /*
-            Server.OnConnectionStatusChanged = () =>
-            {
-                btnDisconnect.IsEnabled = Server.IsConnected;
-                return false;
-            };
-            */
-
+            
             BroadcastServer = new BroadcastServer();
         }
         
@@ -84,7 +77,7 @@ namespace ControlHubDesktop
             if (!WindowRendered)
                 return;
             
-            // Send disconnect
+            // TODO: Send disconnect
 
 
             var ip = comboNetworks.SelectedValue.ToString();

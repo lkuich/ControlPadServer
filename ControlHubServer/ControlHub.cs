@@ -37,9 +37,6 @@ namespace ControlHub
         private Server server;
         public Xbox360Controller X360Controller { get; set; }
         
-        // public bool IsConnected { get; set; }
-        // public Func<bool> OnConnectionStatusChanged { get; set; } // TODO: event
-        
         public ControlHubServer(string host = "localhost", int port = 50051)
         {
             this.Host = host;
@@ -48,7 +45,6 @@ namespace ControlHub
 
         public void Start()
         {
-            // TODO: Only connect when prompted
             var client = new ViGEmClient();
             X360Controller = new Xbox360Controller(client);
             
