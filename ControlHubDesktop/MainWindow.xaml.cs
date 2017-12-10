@@ -20,16 +20,25 @@ namespace ControlHubDesktop
         {
             InitializeComponent();
             Server = new ControlHub.ControlHubServer();
+            /*
+            Server.OnConnectionStatusChanged = () =>
+            {
+                btnDisconnect.IsEnabled = Server.IsConnected;
+                return false;
+            };
+            */
+
             BroadcastServer = new BroadcastServer();
         }
         
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Get list of networks
-            var networks = Network.GetLocalAddresses();
-            comboNetworks.ItemsSource = networks;
-            if (networks.Length > 0)
+            try
             {
+                var networks = Network.GetLocalAddresses();
+                comboNetworks.ItemsSource = networks;
+            
                 comboNetworks.SelectedIndex = 0;
 
                 string selectedHost = comboNetworks.SelectedValue.ToString();
@@ -42,16 +51,17 @@ namespace ControlHubDesktop
                 }).Start();
 
                 WindowRendered = true;
-            } else
+            } catch (Exception ex)
             {
-                MessageBox.Show("We couldn't detect your primary network! Ensure you have a network connection and try again.");
+                MessageBox.Show("We couldn't detect your primary network! Ensure you have a network connection and try again. (" + ex.Message + ")",
+                    "Network error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close(); // Close the window
             }
         }
 
         private void StopServer()
         {
             // Stop will await shutdown, running threads should stop when all stops are called
-
             BroadcastServer.StopBroadcast();
             Server.Stop();
         }
@@ -73,6 +83,10 @@ namespace ControlHubDesktop
         {
             if (!WindowRendered)
                 return;
+            
+            // Send disconnect
+
+
             var ip = comboNetworks.SelectedValue.ToString();
             RestartServer(ip);
         }

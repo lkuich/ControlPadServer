@@ -10,8 +10,6 @@ using Nefarius.ViGEm.Client;
 using Nefarius.ViGEm.Client.Targets;
 using Service;
 using WindowsInput;
-using WindowsInput.Native;
-using ControlHubServer;
 
 namespace ControlHub
 {
@@ -38,7 +36,10 @@ namespace ControlHub
 
         private Server server;
         public Xbox360Controller X360Controller { get; set; }
-
+        
+        // public bool IsConnected { get; set; }
+        // public Func<bool> OnConnectionStatusChanged { get; set; } // TODO: event
+        
         public ControlHubServer(string host = "localhost", int port = 50051)
         {
             this.Host = host;
@@ -55,7 +56,7 @@ namespace ControlHub
             {
                 Services = {
                     XboxButtons.BindService(new XboxImpl(X360Controller)),
-                    StandardInput.BindService(new StandardInputImpl())
+                    StandardInput.BindService(new StandardInputImpl()) // this))
                 },
                 Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
             };

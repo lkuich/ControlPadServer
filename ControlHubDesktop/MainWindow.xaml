@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ControlHubDesktop"
         mc:Ignorable="d"
-        Title="ControlHub Server" Height="155.203" Width="287.995" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="ControlHub Server" Height="124.536" Width="287.995" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
         <ComboBox x:Name="comboNetworks" HorizontalAlignment="Left" Margin="92,55,0,0" VerticalAlignment="Top" Width="170" Height="22" SelectionChanged="comboNetworks_SelectionChanged"/>
-        <Label x:Name="lblTitle" Content="ControlHub Server" HorizontalAlignment="Center" Margin="45,10,52,85.778" VerticalAlignment="Center" Height="30" Width="175" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblTitle" Content="ControlHub Server" HorizontalAlignment="Center" Margin="54,10,54.556,57.333" VerticalAlignment="Center" Height="30" Width="175" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label Content="Listening on:" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
-        <Button x:Name="btnDisconnect" Content="Disconnect" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top" Width="252" Height="24" IsEnabled="False"/>
     </Grid>
 </Window>

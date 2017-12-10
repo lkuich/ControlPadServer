@@ -18,12 +18,30 @@ namespace ControlHub
         private KeyboardSimulator KeyboardSim { get; set; }
         private List<VirtualKeyCode> CurrentKeys { get; set; }
 
-        public StandardInputImpl()
+        private ControlHubServer ControlHubServer { get; set; }
+        
+        public StandardInputImpl() // ControlHubServer controlHubServer)
         {
             var InputSim = new InputSimulator();
             MouseSim = new MouseSimulator(InputSim);
             KeyboardSim = new KeyboardSimulator(InputSim, useScanCodes: true);
             CurrentKeys = new List<VirtualKeyCode>();
+
+            // ControlHubServer = controlHubServer;
+        }
+
+        public override Task<Response> ClientConnected(Connection request, ServerCallContext context)
+        {
+            // ControlHubServer.IsConnected = true;
+            // ControlHubServer.ConnectionStatusChanged.Invoke();
+            return base.ClientConnected(request, context);
+        }
+
+        public override Task<Response> DisconnectClient(Connection request, ServerCallContext context)
+        {
+            // ControlHubServer.IsConnected = false;
+            // ControlHubServer.ConnectionStatusChanged.Invoke();
+            return base.DisconnectClient(request, context);
         }
 
         public override async Task PressKey(IAsyncStreamReader<Key> keyStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)

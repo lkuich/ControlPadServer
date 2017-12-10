@@ -5,6 +5,9 @@ package service;
 service StandardInput {
   rpc PressKey (stream Key) returns(stream Response) {}
   rpc MoveMouse (stream MouseCoords) returns(stream Response) {}
+
+  rpc ClientConnected (Connection) returns (Response) {}
+  rpc DisconnectClient (Connection) returns (Response) {}
 }
 
 service XboxButtons {
@@ -15,20 +18,13 @@ service XboxButtons {
 
   rpc XboxLeftThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
   rpc XboxRightThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
+
+  rpc ClientConnected (Connection) returns (Response) {}
+  rpc DisconnectClient (Connection) returns (Response) {}
 }
 
-service ConnectionHelpers {
-  rpc UpdateConfiguration (Configuration) returns (Response) {}
-  rpc VerifyXboxConnection (XboxButton) returns (Response) {}
-  rpc VerifyStandardConnection (Response) returns (Response) {}
-}
-
-message Configuration {
-  int32 type = 1;
-}
-
-message BroadcastAddress {
-  string ip = 1;
+message Connection {
+  bool isConnected = 1;
 }
 
 message XboxTrigger {

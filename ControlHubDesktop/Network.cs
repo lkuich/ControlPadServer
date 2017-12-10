@@ -11,15 +11,6 @@ namespace ControlHubDesktop
         public static IPAddress[] GetLocalAddresses()
         {
             var networks = new List<IPAddress>();
-            
-            /*var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    networks.Add(ip);
-                }
-            }*/
 
             var networkConnectionNames = NetworkInterface.GetAllNetworkInterfaces(); //.Select(ni => ni.Name);
             foreach (var net in networkConnectionNames)
