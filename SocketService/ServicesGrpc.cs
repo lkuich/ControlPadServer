@@ -9,105 +9,29 @@ using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
 namespace Service {
-  public static partial class Screen
-  {
-    static readonly string __ServiceName = "service.Screen";
-
-    static readonly grpc::Marshaller<global::Service.ScreenshotData> __Marshaller_ScreenshotData = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.ScreenshotData.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Service.ScreenshotData, global::Service.Response> __Method_Screenshot = new grpc::Method<global::Service.ScreenshotData, global::Service.Response>(
-        grpc::MethodType.DuplexStreaming,
-        __ServiceName,
-        "Screenshot",
-        __Marshaller_ScreenshotData,
-        __Marshaller_Response);
-
-    /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
-    {
-      get { return global::Service.ServicesReflection.Descriptor.Services[0]; }
-    }
-
-    /// <summary>Base class for server-side implementations of Screen</summary>
-    public abstract partial class ScreenBase
-    {
-      public virtual global::System.Threading.Tasks.Task Screenshot(grpc::IAsyncStreamReader<global::Service.ScreenshotData> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-    }
-
-    /// <summary>Client for Screen</summary>
-    public partial class ScreenClient : grpc::ClientBase<ScreenClient>
-    {
-      /// <summary>Creates a new client for Screen</summary>
-      /// <param name="channel">The channel to use to make remote calls.</param>
-      public ScreenClient(grpc::Channel channel) : base(channel)
-      {
-      }
-      /// <summary>Creates a new client for Screen that uses a custom <c>CallInvoker</c>.</summary>
-      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public ScreenClient(grpc::CallInvoker callInvoker) : base(callInvoker)
-      {
-      }
-      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected ScreenClient() : base()
-      {
-      }
-      /// <summary>Protected constructor to allow creation of configured clients.</summary>
-      /// <param name="configuration">The client configuration.</param>
-      protected ScreenClient(ClientBaseConfiguration configuration) : base(configuration)
-      {
-      }
-
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.ScreenshotData, global::Service.Response> Screenshot(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return Screenshot(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.ScreenshotData, global::Service.Response> Screenshot(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncDuplexStreamingCall(__Method_Screenshot, null, options);
-      }
-      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override ScreenClient NewInstance(ClientBaseConfiguration configuration)
-      {
-        return new ScreenClient(configuration);
-      }
-    }
-
-    /// <summary>Creates service definition that can be registered with a server</summary>
-    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(ScreenBase serviceImpl)
-    {
-      return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Screenshot, serviceImpl.Screenshot).Build();
-    }
-
-  }
   public static partial class StandardInput
   {
     static readonly string __ServiceName = "service.StandardInput";
 
     static readonly grpc::Marshaller<global::Service.Key> __Marshaller_Key = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Key.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.ScreenshotData> __Marshaller_ScreenshotData = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.ScreenshotData.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.MouseCoords> __Marshaller_MouseCoords = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.MouseCoords.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.Connection> __Marshaller_Connection = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Connection.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Service.Key, global::Service.Response> __Method_PressKey = new grpc::Method<global::Service.Key, global::Service.Response>(
+    static readonly grpc::Method<global::Service.Key, global::Service.ScreenshotData> __Method_PressKey = new grpc::Method<global::Service.Key, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "PressKey",
         __Marshaller_Key,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
-    static readonly grpc::Method<global::Service.MouseCoords, global::Service.Response> __Method_MoveMouse = new grpc::Method<global::Service.MouseCoords, global::Service.Response>(
+    static readonly grpc::Method<global::Service.MouseCoords, global::Service.ScreenshotData> __Method_MoveMouse = new grpc::Method<global::Service.MouseCoords, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "MoveMouse",
         __Marshaller_MouseCoords,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
     static readonly grpc::Method<global::Service.Connection, global::Service.Response> __Method_ClientConnected = new grpc::Method<global::Service.Connection, global::Service.Response>(
         grpc::MethodType.Unary,
@@ -126,18 +50,18 @@ namespace Service {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Service.ServicesReflection.Descriptor.Services[1]; }
+      get { return global::Service.ServicesReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of StandardInput</summary>
     public abstract partial class StandardInputBase
     {
-      public virtual global::System.Threading.Tasks.Task PressKey(grpc::IAsyncStreamReader<global::Service.Key> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task PressKey(grpc::IAsyncStreamReader<global::Service.Key> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task MoveMouse(grpc::IAsyncStreamReader<global::Service.MouseCoords> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task MoveMouse(grpc::IAsyncStreamReader<global::Service.MouseCoords> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -177,19 +101,19 @@ namespace Service {
       {
       }
 
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.Response> PressKey(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.ScreenshotData> PressKey(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return PressKey(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.Response> PressKey(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.Key, global::Service.ScreenshotData> PressKey(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_PressKey, null, options);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.MouseCoords, global::Service.Response> MoveMouse(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.MouseCoords, global::Service.ScreenshotData> MoveMouse(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return MoveMouse(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.MouseCoords, global::Service.Response> MoveMouse(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.MouseCoords, global::Service.ScreenshotData> MoveMouse(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_MoveMouse, null, options);
       }
@@ -249,52 +173,53 @@ namespace Service {
     static readonly string __ServiceName = "service.XboxButtons";
 
     static readonly grpc::Marshaller<global::Service.XboxButton> __Marshaller_XboxButton = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxButton.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.ScreenshotData> __Marshaller_ScreenshotData = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.ScreenshotData.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.XboxTrigger> __Marshaller_XboxTrigger = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxTrigger.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.XboxThumbAxis> __Marshaller_XboxThumbAxis = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.XboxThumbAxis.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Service.Connection> __Marshaller_Connection = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Connection.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Service.XboxButton, global::Service.Response> __Method_PressXboxButton = new grpc::Method<global::Service.XboxButton, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxButton, global::Service.ScreenshotData> __Method_PressXboxButton = new grpc::Method<global::Service.XboxButton, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "PressXboxButton",
         __Marshaller_XboxButton,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
-    static readonly grpc::Method<global::Service.XboxButton, global::Service.Response> __Method_DepressXboxButton = new grpc::Method<global::Service.XboxButton, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxButton, global::Service.ScreenshotData> __Method_DepressXboxButton = new grpc::Method<global::Service.XboxButton, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "DepressXboxButton",
         __Marshaller_XboxButton,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
-    static readonly grpc::Method<global::Service.XboxTrigger, global::Service.Response> __Method_XboxLeftTrigger = new grpc::Method<global::Service.XboxTrigger, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxTrigger, global::Service.ScreenshotData> __Method_XboxLeftTrigger = new grpc::Method<global::Service.XboxTrigger, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "XboxLeftTrigger",
         __Marshaller_XboxTrigger,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
-    static readonly grpc::Method<global::Service.XboxTrigger, global::Service.Response> __Method_XboxRightTrigger = new grpc::Method<global::Service.XboxTrigger, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxTrigger, global::Service.ScreenshotData> __Method_XboxRightTrigger = new grpc::Method<global::Service.XboxTrigger, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "XboxRightTrigger",
         __Marshaller_XboxTrigger,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
-    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.Response> __Method_XboxLeftThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.ScreenshotData> __Method_XboxLeftThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "XboxLeftThumbAxis",
         __Marshaller_XboxThumbAxis,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
-    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.Response> __Method_XboxRightThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.Response>(
+    static readonly grpc::Method<global::Service.XboxThumbAxis, global::Service.ScreenshotData> __Method_XboxRightThumbAxis = new grpc::Method<global::Service.XboxThumbAxis, global::Service.ScreenshotData>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "XboxRightThumbAxis",
         __Marshaller_XboxThumbAxis,
-        __Marshaller_Response);
+        __Marshaller_ScreenshotData);
 
     static readonly grpc::Method<global::Service.Connection, global::Service.Response> __Method_ClientConnected = new grpc::Method<global::Service.Connection, global::Service.Response>(
         grpc::MethodType.Unary,
@@ -313,38 +238,38 @@ namespace Service {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Service.ServicesReflection.Descriptor.Services[2]; }
+      get { return global::Service.ServicesReflection.Descriptor.Services[1]; }
     }
 
     /// <summary>Base class for server-side implementations of XboxButtons</summary>
     public abstract partial class XboxButtonsBase
     {
-      public virtual global::System.Threading.Tasks.Task PressXboxButton(grpc::IAsyncStreamReader<global::Service.XboxButton> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task PressXboxButton(grpc::IAsyncStreamReader<global::Service.XboxButton> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task DepressXboxButton(grpc::IAsyncStreamReader<global::Service.XboxButton> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task DepressXboxButton(grpc::IAsyncStreamReader<global::Service.XboxButton> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task XboxLeftTrigger(grpc::IAsyncStreamReader<global::Service.XboxTrigger> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task XboxLeftTrigger(grpc::IAsyncStreamReader<global::Service.XboxTrigger> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task XboxRightTrigger(grpc::IAsyncStreamReader<global::Service.XboxTrigger> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task XboxRightTrigger(grpc::IAsyncStreamReader<global::Service.XboxTrigger> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task XboxLeftThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task XboxLeftThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task XboxRightThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task XboxRightThumbAxis(grpc::IAsyncStreamReader<global::Service.XboxThumbAxis> requestStream, grpc::IServerStreamWriter<global::Service.ScreenshotData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -384,51 +309,51 @@ namespace Service {
       {
       }
 
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.Response> PressXboxButton(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.ScreenshotData> PressXboxButton(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return PressXboxButton(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.Response> PressXboxButton(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.ScreenshotData> PressXboxButton(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_PressXboxButton, null, options);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.Response> DepressXboxButton(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.ScreenshotData> DepressXboxButton(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return DepressXboxButton(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.Response> DepressXboxButton(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxButton, global::Service.ScreenshotData> DepressXboxButton(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_DepressXboxButton, null, options);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.Response> XboxLeftTrigger(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.ScreenshotData> XboxLeftTrigger(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return XboxLeftTrigger(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.Response> XboxLeftTrigger(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.ScreenshotData> XboxLeftTrigger(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxLeftTrigger, null, options);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.Response> XboxRightTrigger(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.ScreenshotData> XboxRightTrigger(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return XboxRightTrigger(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.Response> XboxRightTrigger(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxTrigger, global::Service.ScreenshotData> XboxRightTrigger(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxRightTrigger, null, options);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxLeftThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.ScreenshotData> XboxLeftThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return XboxLeftThumbAxis(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxLeftThumbAxis(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.ScreenshotData> XboxLeftThumbAxis(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxLeftThumbAxis, null, options);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxRightThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.ScreenshotData> XboxRightThumbAxis(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return XboxRightThumbAxis(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.Response> XboxRightThumbAxis(grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Service.XboxThumbAxis, global::Service.ScreenshotData> XboxRightThumbAxis(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_XboxRightThumbAxis, null, options);
       }

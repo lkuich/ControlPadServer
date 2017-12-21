@@ -2,26 +2,22 @@
 
 package service;
 
-service Screen {
-  rpc Screenshot (stream ScreenshotData) returns (stream Response) {}
-}
-
 service StandardInput {
-  rpc PressKey (stream Key) returns(stream Response) {}
-  rpc MoveMouse (stream MouseCoords) returns(stream Response) {}
+  rpc PressKey (stream Key) returns(stream ScreenshotData) {}
+  rpc MoveMouse (stream MouseCoords) returns(stream ScreenshotData) {}
 
   rpc ClientConnected (Connection) returns (Response) {}
   rpc DisconnectClient (Connection) returns (Response) {}
 }
 
 service XboxButtons {
-  rpc PressXboxButton (stream XboxButton) returns(stream Response) {}
-  rpc DepressXboxButton (stream XboxButton) returns(stream Response) {}
-  rpc XboxLeftTrigger (stream XboxTrigger) returns(stream Response) {}
-  rpc XboxRightTrigger (stream XboxTrigger) returns(stream Response) {}
+  rpc PressXboxButton (stream XboxButton) returns(stream ScreenshotData) {}
+  rpc DepressXboxButton (stream XboxButton) returns(stream ScreenshotData) {}
+  rpc XboxLeftTrigger (stream XboxTrigger) returns(stream ScreenshotData) {}
+  rpc XboxRightTrigger (stream XboxTrigger) returns(stream ScreenshotData) {}
 
-  rpc XboxLeftThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
-  rpc XboxRightThumbAxis (stream XboxThumbAxis) returns(stream Response) {}
+  rpc XboxLeftThumbAxis (stream XboxThumbAxis) returns(stream ScreenshotData) {}
+  rpc XboxRightThumbAxis (stream XboxThumbAxis) returns(stream ScreenshotData) {}
 
   rpc ClientConnected (Connection) returns (Response) {}
   rpc DisconnectClient (Connection) returns (Response) {}

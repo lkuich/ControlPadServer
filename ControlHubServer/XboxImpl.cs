@@ -10,6 +10,7 @@ using Nefarius.ViGEm.Client.Targets;
 using Nefarius.ViGEm.Client.Targets.Xbox360;
 using Service;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ControlHub
 {
@@ -24,7 +25,28 @@ namespace ControlHub
             this.Report = new Xbox360Report();
         }
 
-        public override async Task PressXboxButton(IAsyncStreamReader<XboxButton> buttonStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        private Google.Protobuf.ByteString TakeScreenshot()
+        {
+            using (Bitmap bmpScreenCapture = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
+                                            Screen.PrimaryScreen.Bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmpScreenCapture))
+                {
+                    g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
+                                     Screen.PrimaryScreen.Bounds.Y,
+                                     0, 0,
+                                     bmpScreenCapture.Size,
+                                     CopyPixelOperation.SourceCopy);
+
+                    // Send to client
+                    ImageConverter converter = new ImageConverter();
+                    var image = (byte[])converter.ConvertTo(bmpScreenCapture, typeof(byte[]));
+                    return Google.Protobuf.ByteString.CopyFrom(image);
+                }
+            }
+        }
+
+        public override async Task PressXboxButton(IAsyncStreamReader<XboxButton> buttonStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await buttonStream.MoveNext())
             {
@@ -34,13 +56,13 @@ namespace ControlHub
 
                 Report.SetButtonState((Xbox360Buttons)button.Id, true);
                 X360Controller.SendReport(Report);
-                
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
 
-        public override async Task DepressXboxButton(IAsyncStreamReader<XboxButton> buttonStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        public override async Task DepressXboxButton(IAsyncStreamReader<XboxButton> buttonStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await buttonStream.MoveNext())
             {
@@ -48,9 +70,9 @@ namespace ControlHub
 
                 Report.SetButtonState((Xbox360Buttons)button.Id, false);
                 X360Controller.SendReport(Report);
-                
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
 
@@ -78,7 +100,7 @@ namespace ControlHub
             X360Controller.SendReport(Report);
         }
 
-        public override async Task XboxLeftThumbAxis(IAsyncStreamReader<XboxThumbAxis> axisStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        public override async Task XboxLeftThumbAxis(IAsyncStreamReader<XboxThumbAxis> axisStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await axisStream.MoveNext())
             {
@@ -86,24 +108,24 @@ namespace ControlHub
                 var axis = axisStream.Current;
                 SetThumbStickAxis(axis, Side.LEFT);
 
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
 
-        public override async Task XboxRightThumbAxis(IAsyncStreamReader<XboxThumbAxis> axisStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        public override async Task XboxRightThumbAxis(IAsyncStreamReader<XboxThumbAxis> axisStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await axisStream.MoveNext())
             {
                 var axis = axisStream.Current;
                 SetThumbStickAxis(axis, Side.RIGHT);
 
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
 
-        public override async Task XboxLeftTrigger(IAsyncStreamReader<XboxTrigger> triggerStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        public override async Task XboxLeftTrigger(IAsyncStreamReader<XboxTrigger> triggerStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await triggerStream.MoveNext())
             {
@@ -112,12 +134,12 @@ namespace ControlHub
                 Report.SetAxis(Xbox360Axes.LeftTrigger, (short)trigger.Pressure);
                 X360Controller.SendReport(Report);
 
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
 
-        public override async Task XboxRightTrigger(IAsyncStreamReader<XboxTrigger> triggerStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        public override async Task XboxRightTrigger(IAsyncStreamReader<XboxTrigger> triggerStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await triggerStream.MoveNext())
             {
@@ -126,8 +148,8 @@ namespace ControlHub
                 Report.SetAxis(Xbox360Axes.RightTrigger, (short)trigger.Pressure);
                 X360Controller.SendReport(Report);
 
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
     }

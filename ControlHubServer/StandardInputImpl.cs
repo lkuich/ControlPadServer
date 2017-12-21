@@ -9,6 +9,7 @@ using WindowsInput;
 using WindowsInput.Native;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace ControlHub
 {
@@ -28,7 +29,28 @@ namespace ControlHub
             CurrentKeys = new List<VirtualKeyCode>();
         }
 
-        public override async Task PressKey(IAsyncStreamReader<Key> keyStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        private Google.Protobuf.ByteString TakeScreenshot()
+        {
+            using (Bitmap bmpScreenCapture = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
+                                            Screen.PrimaryScreen.Bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmpScreenCapture))
+                {
+                    g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
+                                     Screen.PrimaryScreen.Bounds.Y,
+                                     0, 0,
+                                     bmpScreenCapture.Size,
+                                     CopyPixelOperation.SourceCopy);
+                    
+                    // Send to client
+                    ImageConverter converter = new ImageConverter();
+                    var image = (byte[])converter.ConvertTo(bmpScreenCapture, typeof(byte[]));
+                    return Google.Protobuf.ByteString.CopyFrom(image);
+                }
+            }
+        }
+
+        public override async Task PressKey(IAsyncStreamReader<Key> keyStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await keyStream.MoveNext())
             {
@@ -91,8 +113,8 @@ namespace ControlHub
                 if (CurrentKeys.Count > 0)
                     Console.WriteLine(string.Join(",", CurrentKeys.ToArray()));
 
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = null }; // TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
 
@@ -131,7 +153,7 @@ namespace ControlHub
         }
 
         public Point InitialMouseCoords { get; set; }
-        public override async Task MoveMouse(IAsyncStreamReader<MouseCoords> coordsStream, IServerStreamWriter<Response> responseStream, ServerCallContext context)
+        public override async Task MoveMouse(IAsyncStreamReader<MouseCoords> coordsStream, IServerStreamWriter<ScreenshotData> responseStream, ServerCallContext context)
         {
             while (await coordsStream.MoveNext())
             {
@@ -150,8 +172,8 @@ namespace ControlHub
                 MouseSim.MoveMouseBy((coords.X * -1) / sensitivity, (coords.Y * -1) / sensitivity);
                 // MouseSim.MoveMouseToPositionOnVirtualDesktop(coords.X, coords.Y);
 
-                Response reply = new Response { Received = true };
-                await responseStream.WriteAsync(reply);
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = null };// TakeScreenshot() };
+                await responseStream.WriteAsync(response);
             }
         }
     }
