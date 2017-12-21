@@ -70,6 +70,11 @@ namespace ControlHub
                 ServerStarted = false;
             }
         }
+
+        public void SendScreenshot(byte[] image)
+        {
+            
+        }
     }
 
     public class ControlHubClient

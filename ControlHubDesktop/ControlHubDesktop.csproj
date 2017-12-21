@@ -44,9 +44,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -127,6 +129,18 @@
       <Project>{6f0902f3-ff5a-4871-8c4c-90c022dfee28}</Project>
       <Name>WindowsInput</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\if_info-alt_383122.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\if_globe-full_383130.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\globe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.1.7.1\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.7.1\build\net45\Grpc.Core.targets')" />
