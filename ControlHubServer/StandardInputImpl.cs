@@ -113,7 +113,7 @@ namespace ControlHub
                 if (CurrentKeys.Count > 0)
                     Console.WriteLine(string.Join(",", CurrentKeys.ToArray()));
 
-                ScreenshotData response = new ScreenshotData { Index = 0, Content = null }; // TakeScreenshot() };
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
                 await responseStream.WriteAsync(response);
             }
         }
@@ -172,7 +172,7 @@ namespace ControlHub
                 MouseSim.MoveMouseBy((coords.X * -1) / sensitivity, (coords.Y * -1) / sensitivity);
                 // MouseSim.MoveMouseToPositionOnVirtualDesktop(coords.X, coords.Y);
 
-                ScreenshotData response = new ScreenshotData { Index = 0, Content = null };// TakeScreenshot() };
+                ScreenshotData response = new ScreenshotData { Index = 0, Content = TakeScreenshot() };
                 await responseStream.WriteAsync(response);
             }
         }
