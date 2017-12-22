@@ -2,10 +2,6 @@
 
 package service;
 
-service Screen {
-  rpc Screenshot (stream ScreenshotData) returns (stream Response) {}
-}
-
 service StandardInput {
   rpc PressKey (stream Key) returns(stream Response) {}
   rpc MoveMouse (stream MouseCoords) returns(stream Response) {}
@@ -25,11 +21,6 @@ service XboxButtons {
 
   rpc ClientConnected (Connection) returns (Response) {}
   rpc DisconnectClient (Connection) returns (Response) {}
-}
-
-message ScreenshotData {
-  int32 index = 1;
-  bytes content = 2;
 }
 
 message Connection {

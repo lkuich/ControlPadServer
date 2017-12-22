@@ -26,47 +26,8 @@ namespace ControlHubDesktop
             Server = new ControlHub.ControlHubServer();
 
             BroadcastServer = new BroadcastServer();
-
-            using (Bitmap bmpScreenCapture = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
-                                            Screen.PrimaryScreen.Bounds.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bmpScreenCapture))
-                {
-                    g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
-                                     Screen.PrimaryScreen.Bounds.Y,
-                                     0, 0,
-                                     bmpScreenCapture.Size,
-                                     CopyPixelOperation.SourceCopy);
-
-                    var bytes = ImageToByte(bmpScreenCapture);
-                    // Send to client
-                    
-                }
-            }
         }
-
-        public static byte[] ImageToByte(System.Drawing.Image img)
-        {
-            ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
-        }
-
-        BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-
-                return bitmapimage;
-            }
-        }
-
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Get list of networks
@@ -80,10 +41,13 @@ namespace ControlHubDesktop
                 string selectedHost = comboNetworks.SelectedValue.ToString();
                 new Thread(() =>
                 {
-                    BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
-
+                }).Start();
+                new Thread(() =>
+                {
                     Server.Host = selectedHost;
                     Server.Start();
+                    
+                    BroadcastServer.StartBroadcast(IPAddress.Parse(selectedHost));
                 }).Start();
 
                 WindowRendered = true;

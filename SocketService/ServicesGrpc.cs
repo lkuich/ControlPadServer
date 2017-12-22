@@ -9,83 +9,6 @@ using System.Threading.Tasks;
 using grpc = global::Grpc.Core;
 
 namespace Service {
-  public static partial class Screen
-  {
-    static readonly string __ServiceName = "service.Screen";
-
-    static readonly grpc::Marshaller<global::Service.ScreenshotData> __Marshaller_ScreenshotData = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.ScreenshotData.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Service.Response> __Marshaller_Response = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Service.Response.Parser.ParseFrom);
-
-    static readonly grpc::Method<global::Service.ScreenshotData, global::Service.Response> __Method_Screenshot = new grpc::Method<global::Service.ScreenshotData, global::Service.Response>(
-        grpc::MethodType.DuplexStreaming,
-        __ServiceName,
-        "Screenshot",
-        __Marshaller_ScreenshotData,
-        __Marshaller_Response);
-
-    /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
-    {
-      get { return global::Service.ServicesReflection.Descriptor.Services[0]; }
-    }
-
-    /// <summary>Base class for server-side implementations of Screen</summary>
-    public abstract partial class ScreenBase
-    {
-      public virtual global::System.Threading.Tasks.Task Screenshot(grpc::IAsyncStreamReader<global::Service.ScreenshotData> requestStream, grpc::IServerStreamWriter<global::Service.Response> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-    }
-
-    /// <summary>Client for Screen</summary>
-    public partial class ScreenClient : grpc::ClientBase<ScreenClient>
-    {
-      /// <summary>Creates a new client for Screen</summary>
-      /// <param name="channel">The channel to use to make remote calls.</param>
-      public ScreenClient(grpc::Channel channel) : base(channel)
-      {
-      }
-      /// <summary>Creates a new client for Screen that uses a custom <c>CallInvoker</c>.</summary>
-      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public ScreenClient(grpc::CallInvoker callInvoker) : base(callInvoker)
-      {
-      }
-      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected ScreenClient() : base()
-      {
-      }
-      /// <summary>Protected constructor to allow creation of configured clients.</summary>
-      /// <param name="configuration">The client configuration.</param>
-      protected ScreenClient(ClientBaseConfiguration configuration) : base(configuration)
-      {
-      }
-
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.ScreenshotData, global::Service.Response> Screenshot(grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return Screenshot(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncDuplexStreamingCall<global::Service.ScreenshotData, global::Service.Response> Screenshot(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncDuplexStreamingCall(__Method_Screenshot, null, options);
-      }
-      /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
-      protected override ScreenClient NewInstance(ClientBaseConfiguration configuration)
-      {
-        return new ScreenClient(configuration);
-      }
-    }
-
-    /// <summary>Creates service definition that can be registered with a server</summary>
-    /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
-    public static grpc::ServerServiceDefinition BindService(ScreenBase serviceImpl)
-    {
-      return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Screenshot, serviceImpl.Screenshot).Build();
-    }
-
-  }
   public static partial class StandardInput
   {
     static readonly string __ServiceName = "service.StandardInput";
@@ -126,7 +49,7 @@ namespace Service {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Service.ServicesReflection.Descriptor.Services[1]; }
+      get { return global::Service.ServicesReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of StandardInput</summary>
@@ -313,7 +236,7 @@ namespace Service {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Service.ServicesReflection.Descriptor.Services[2]; }
+      get { return global::Service.ServicesReflection.Descriptor.Services[1]; }
     }
 
     /// <summary>Base class for server-side implementations of XboxButtons</summary>
