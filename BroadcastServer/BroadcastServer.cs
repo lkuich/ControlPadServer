@@ -74,7 +74,7 @@ public static class IPAddressExtensions
 
 public class BroadcastServer
 {
-    private readonly int Port = 58384;
+    private readonly int Port = 58385;
     private UdpClient UdpClient { get; set; }
     private bool ClientRecieved { get; set; }
 

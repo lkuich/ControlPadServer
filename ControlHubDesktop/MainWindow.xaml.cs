@@ -41,9 +41,6 @@ namespace ControlHubDesktop
                 string selectedHost = comboNetworks.SelectedValue.ToString();
                 new Thread(() =>
                 {
-                }).Start();
-                new Thread(() =>
-                {
                     Server.Host = selectedHost;
                     Server.Start();
                     

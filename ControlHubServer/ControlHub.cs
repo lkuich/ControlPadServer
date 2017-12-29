@@ -65,7 +65,9 @@ namespace ControlHub
         {
             if (ServerStarted)
             {
-                X360Controller.Disconnect();
+                try {
+                    X360Controller.Disconnect();
+                } catch (Exception e) { }
                 await server.ShutdownAsync();
                 ServerStarted = false;
             }

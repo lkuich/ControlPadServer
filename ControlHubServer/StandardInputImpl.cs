@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Service;
@@ -66,10 +64,12 @@ namespace ControlHub
                         else if (k == VirtualKeyCode.LBUTTON)
                         {
                             MouseSim.LeftButtonDown();
+                            CurrentKeys.Add(k);
                         }
                         else if (k == VirtualKeyCode.RBUTTON)
                         {
                             MouseSim.RightButtonDown();
+                            CurrentKeys.Add(k);
                         }
                         else // Treat as a button
                         {
