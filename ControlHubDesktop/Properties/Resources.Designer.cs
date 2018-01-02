@@ -71,26 +71,6 @@ namespace ControlPadServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] if_globe_full_383130 {
-            get {
-                object obj = ResourceManager.GetObject("if_globe_full_383130", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] if_info_alt_383122 {
-            get {
-                object obj = ResourceManager.GetObject("if_info_alt_383122", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap info {
